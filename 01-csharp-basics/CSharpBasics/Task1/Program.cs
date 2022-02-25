@@ -30,7 +30,7 @@ namespace Task1
                 
             }
 
-            Console.Write($"Площадь прямоугольника: {a * b}");
+            Console.Write(a * b);
 
         }
     }

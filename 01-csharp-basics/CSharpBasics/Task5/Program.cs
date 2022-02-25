@@ -17,7 +17,7 @@ namespace Task5
                 }
             }
 
-            Console.WriteLine($"Сумма всех чисел меньше {border}, кратных 3, или 5 равна: {sum}");
+            Console.WriteLine(sum);
         }
     }
 }
