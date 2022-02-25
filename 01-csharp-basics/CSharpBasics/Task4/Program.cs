@@ -23,7 +23,7 @@ namespace Task4
                 for (int j = 0; j <= i; j++)
                 {
 
-                    for (int k = N; k > j; k--)
+                    for (int k = N - 1; k > j; k--)
                     {
                         Console.Write(" ");
                     }
@@ -35,7 +35,7 @@ namespace Task4
 
                     Console.WriteLine();
 
-                }     
+                }
             }
 
 
