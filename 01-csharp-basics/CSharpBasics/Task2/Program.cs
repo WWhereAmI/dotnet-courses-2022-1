@@ -20,7 +20,9 @@ namespace Task2
 
             for (int i = 0; i < N; i++)
             {
+                //NewFeathure
                 Console.WriteLine(new string('*', i + 1)); 
+
                 //for (int j = 0; j <= i; j++)
                 //{
                 //    Console.Write("*");
