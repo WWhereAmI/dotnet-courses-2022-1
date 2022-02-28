@@ -16,7 +16,10 @@ namespace Task1
             {
                 Console.Write("Введите сторону a: ");
 
-                if (int.TryParse(Console.ReadLine(), out a) && a > 0) break;           
+                if (int.TryParse(Console.ReadLine(), out a) && a > 0)
+                { 
+                    break; 
+                }            
                 else Console.WriteLine("Введено неккоректное значение стороны прямоугольника. Повторите попытку...");
                
             }
