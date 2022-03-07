@@ -9,6 +9,8 @@ namespace Task1
         {
             Console.Write("Введите строку: ");
             double averageLength = AverageLength(GetString());
+            
+            Console.WriteLine(averageLength);
         }
 
         /// <summary>
@@ -28,7 +30,7 @@ namespace Task1
 
             foreach (var chr in str)
             {
-                if (!char.IsPunctuation(chr)) lenght++;
+                if (!char.IsPunctuation(chr) && !char.IsSeparator(chr)) lenght++;
             }
 
             return lenght / 2;

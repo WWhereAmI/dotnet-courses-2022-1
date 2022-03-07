@@ -15,7 +15,8 @@ namespace Task5
             string pattern = @"<.+?>";
             string replacement = "_";
 
-            Console.WriteLine(ReplaceByPattern(input, pattern, replacement));
+            string replaceResult = ReplaceByPattern(input, pattern, replacement);
+            Console.WriteLine($"Результат замены: {replaceResult}");
 
         }
 
