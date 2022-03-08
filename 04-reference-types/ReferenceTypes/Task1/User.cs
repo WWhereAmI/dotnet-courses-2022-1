@@ -18,7 +18,7 @@ namespace Task1
             get => name;
             set 
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException("Incorrect name");
                 }
@@ -34,7 +34,7 @@ namespace Task1
             get => lastName;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException("Incorrect lastname");
                 }
