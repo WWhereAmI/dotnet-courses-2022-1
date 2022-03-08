@@ -6,7 +6,7 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            User user2 = new User("Alexander", "Pshenichnikov", "V", new DateTime(2000, 7, 4));
+            User user2 = new User(new DateTime(2000, 7, 4), "Pshenichnikov", "Alexander", "V");
             Console.WriteLine(user2);
         }
     }

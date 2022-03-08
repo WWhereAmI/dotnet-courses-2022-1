@@ -8,6 +8,7 @@ namespace Task1
         private string lastName;
         private string patronymic;
         private int age;
+        private DateTime birthday;
 
         /// <summary>
         /// User name
@@ -79,17 +80,18 @@ namespace Task1
         /// <param name="lastname"></param>
         /// <param name="patronymic"></param>
         /// <param name="birthday"></param>
-        public User(string name, string lastname, string patronymic, DateTime birthday)
+        public User(DateTime birthday, string lastname, string name, string patronymic)
         {
             Name = name;
             Lastname = lastname;
             Patronymic = patronymic;
+            this.birthday = birthday;
             Age = (DateTime.Now - birthday).Days / 365;
         }
 
         public override string ToString()
         {
-            return $"Имя: {Name} Фамилия: {Lastname} Отчество: {Patronymic} Возраст: {age}";
+            return $"Имя: {Name} Фамилия: {Lastname} Отчество: {Patronymic} Дата рождения: {birthday.ToShortDateString()} Возраст: {age}";
         }
     }
 }
