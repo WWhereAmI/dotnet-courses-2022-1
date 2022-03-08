@@ -16,7 +16,7 @@ namespace Task1
         public string Name
         {
             get => name;
-            set 
+            set
             {
                 if (string.IsNullOrEmpty(value))
                 {
@@ -74,38 +74,19 @@ namespace Task1
         }
 
         /// <summary>
-        /// User birthday
-        /// </summary>
-        public DateTime BirthDay
-        {
-            get => birthDay;
-
-            set
-            {
-                if (value > DateTime.Now)
-                {
-                    throw new ArgumentException("Incorrect BirthDay");
-                }
-
-                birthDay = value;
-            }
-        }
-
-
-        /// <summary>
         /// User constructor
         /// </summary>
         /// <param name="name"></param>
         /// <param name="lastname"></param>
         /// <param name="patronymic"></param>
         /// <param name="birthday"></param>
-        public User(DateTime birthday, string lastname, string name, string patronymic)
+        public User(string name, string lastname, string patronymic, DateTime birthDay)
         {
             Name = name;
             Lastname = lastname;
             Patronymic = patronymic;
-            BirthDay = birthday;
-            Age = (DateTime.Now - birthday).Days / 365;
+            this.birthDay = birthDay;
+            Age = (DateTime.Now - birthDay).Days / 365;
         }
 
         public override string ToString()
