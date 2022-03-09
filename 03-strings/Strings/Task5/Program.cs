@@ -9,9 +9,9 @@ namespace Task5
         {
             Console.Write("Введите строку: ");
 
-            string input = "<b>Это</b> текст <i>с</i> <font color=”red”>HTML</font> кодами";
+            //string input = "<b>Это</b> текст <i>с</i> <font color=”red”>HTML</font> кодами";
 
-            //string input = GetString();
+            string input = GetString();
             string pattern = @"<.+?>";
             string replacement = "_";
 
