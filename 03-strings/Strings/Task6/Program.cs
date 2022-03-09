@@ -8,12 +8,14 @@ namespace Task6
         static void Main(string[] args)
         {
             Console.Write("Введите число: ");
-            string valueToCheck = GetValue();
+            //string valueToCheck = GetValue();
 
-            //string scientificNotationValue = "5.75124214e-54214";
-            //string commonNotationValue = "-4.2145";
+            string scientificNotationValue = "5.75124214e-54214";
+            string commonNotationValue = "-4.2145";
 
-            Console.WriteLine(CheckValue(valueToCheck));
+            Console.WriteLine(CheckValue(scientificNotationValue));
+            Console.WriteLine(CheckValue(commonNotationValue));
+            Console.WriteLine(CheckValue("Hello"));
         }
 
         /// <summary>
@@ -33,16 +35,13 @@ namespace Task6
             {
                 return "Это число в научной нотации";
             }
-
-            else if (IsCommonNotation(value))
+            if (IsCommonNotation(value))
             {
                 return "Это число в обычной нотации";
             }
 
-            else
-            {
-                return "Это не число";
-            }
+            return "Это не число";
+
         }
 
         /// <summary>

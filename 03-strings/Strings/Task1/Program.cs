@@ -4,7 +4,7 @@ namespace Task1
 {
     internal class Program
     {
-
+        //Доделать
         static void Main(string[] args)
         {
             Console.Write("Введите строку: ");

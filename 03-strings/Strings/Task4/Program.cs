@@ -19,7 +19,7 @@ namespace Task4
         /// </summary>
         /// <param name="N"></param>
         /// <returns>Result of the speed test</returns>
-        static string StringAnalysis(int N = 100000)
+        static string StringAnalysis(int N = 5)
         {
             Stopwatch sw = new Stopwatch();
 
@@ -40,7 +40,7 @@ namespace Task4
         /// </summary>
         /// <param name="N"></param>
         /// <returns>Result of the speed test</returns>
-        static string StringBuilderAnalysis(int N = 100000)
+        static string StringBuilderAnalysis(int N = 5)
         {
             Stopwatch sw = new Stopwatch();
 
@@ -55,9 +55,5 @@ namespace Task4
 
             return $"StringBuilder: {sw.Elapsed.TotalMilliseconds}";
         }
-
-
-
-
     }
 }

@@ -9,8 +9,8 @@ namespace Task7
         {
             Console.Write("Введите текст: ");
 
-            string text = GetText();
-            //string text = "В 7:55 я встал, позавтракал и к 10:77 пошел на работу.";
+            //string text = GetText();
+            string text = "В 7:55 я встал, позавтракал и к 10:77 пошел на работу. 24:000";
 
             int result = NumberOfTimes(text);
 
@@ -30,7 +30,7 @@ namespace Task7
         /// <returns>Number of times</returns>
         static int NumberOfTimes(string text)
         {
-            string pattern = @"\b(\d|1\d|2[0-4]):[0-5]\d\b";
+            string pattern = @"\b(\d|1\d|2[0-3]):[0-5]\d\b";
 
             return Regex.Matches(text, pattern).Count;
         }

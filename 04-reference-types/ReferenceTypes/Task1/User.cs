@@ -7,7 +7,7 @@ namespace Task1
         private string name;
         private string lastName;
         private string patronymic;
-        private int age;
+        //private int age;
         private DateTime birthDay;
 
         /// <summary>
@@ -62,15 +62,7 @@ namespace Task1
         /// </summary>
         public int Age
         {
-            get => age;
-            set
-            {
-                if (value < 1 || value > 150)
-                {
-                    throw new ArgumentException("Incorrect age");
-                }
-                age = value;
-            }
+            get => (DateTime.Now - birthDay).Days / 365;         
         }
 
         /// <summary>
@@ -85,13 +77,12 @@ namespace Task1
             Name = name;
             Lastname = lastname;
             Patronymic = patronymic;
-            this.birthDay = birthDay;
-            Age = (DateTime.Now - birthDay).Days / 365;
+            this.birthDay = birthDay;          
         }
 
         public override string ToString()
         {
-            return $"Имя: {Name} Фамилия: {Lastname} Отчество: {Patronymic} Дата рождения: {birthDay.ToShortDateString()} Возраст: {age}";
+            return $"Имя: {Name} Фамилия: {Lastname} Отчество: {Patronymic} Дата рождения: {birthDay.ToShortDateString()} Возраст: {Age}";
         }
     }
 }

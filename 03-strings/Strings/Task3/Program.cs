@@ -25,7 +25,7 @@ namespace Task3
         static void PrintCultureDifference(CultureInfo[] cultures)
         {
             DateTime dateTime = DateTime.Now;
-            double value = 1_000_000.14881337;
+            double value = 1000000.14881337;
 
             foreach (CultureInfo culture in cultures)
             {
