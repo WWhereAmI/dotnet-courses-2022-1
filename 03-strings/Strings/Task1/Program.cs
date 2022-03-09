@@ -33,7 +33,9 @@ namespace Task1
                 if (!char.IsPunctuation(chr) && !char.IsSeparator(chr)) lenght++;
             }
 
-            return lenght / 2;
+            string[] words = str.Split(' ');
+
+            return lenght / words.Length;
 
         }
     }
