@@ -27,7 +27,7 @@ namespace Task2
         /// <summary>
         /// Circumference of the ring
         /// </summary>
-        public override double Circumference { get => (2 * Math.PI * Radius) + (2 * Math.PI * InnerRadius); }
+        public override double Circumference { get => base.Circumference + (2 * Math.PI * InnerRadius); }
 
         /// <summary>
         /// Area of the ring

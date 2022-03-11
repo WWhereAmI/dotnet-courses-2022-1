@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Task1
 {
@@ -10,13 +8,13 @@ namespace Task1
         private string email;
         private string telegram;
 
-        public string Phone 
-        { 
+        public string Phone
+        {
             get => phone;
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (value == string.Empty)
                 {
                     throw new ArgumentException("Incorrect phone");
                 }
@@ -30,7 +28,7 @@ namespace Task1
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (value == string.Empty)
                 {
                     throw new ArgumentException("Incorrect email");
                 }
@@ -43,7 +41,7 @@ namespace Task1
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (value == string.Empty)
                 {
                     throw new ArgumentException("Incorrect telegram");
                 }
@@ -58,9 +56,10 @@ namespace Task1
             Email = email;
             Telegram = telegram;
         }
-        public ContactInformation(string phone, string email) : this(phone, email, "Телеграм не указан") { }
-        public ContactInformation(string phone) : this(phone, "Почта не указана", "Телеграм не указан") { }
-        public ContactInformation() : this("Телефон не указан", "Почта не указана", "Телеграм не указан") { }
+
+        //null лучше заглушек
+        public ContactInformation(string phone, string email) : this(phone, email, null) { }
+        public ContactInformation(string phone) : this(phone, null, null) { }
 
         public override string ToString()
         {

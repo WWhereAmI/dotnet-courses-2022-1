@@ -49,7 +49,7 @@ namespace Task1
         {
             Salary = salary;
             this.admissionToWork = admissionToWork;
-            ContactInformation = contacts ?? new ContactInformation();
+            ContactInformation = contacts;
             Title = title;
         }
 

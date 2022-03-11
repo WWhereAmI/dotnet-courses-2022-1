@@ -66,6 +66,8 @@ namespace Task1
             get => (DateTime.Now - birthDay).Days / 365;         
         }
 
+        public User() { }
+
         /// <summary>
         /// User constructor
         /// </summary>
