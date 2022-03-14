@@ -24,8 +24,6 @@ namespace Task1
             }
         }
 
-        public override string FigureType => "Ring";
-
         /// <summary>
         /// Circumference of the ring
         /// </summary>
@@ -44,19 +42,12 @@ namespace Task1
         
         public override void Draw()
         {
-            Console.WriteLine(this);
-        }
-
-        public override string ToString()
-        {
-            return $"Фигура: {FigureType} " +
+            Console.WriteLine($"Фигура: {nameof(Ring)} " +
                 $"Координаты: ({X}:{Y}) " +
                 $"Радиус: {Radius} " +
                 $"Внутренний радиус: {InnerRadius} " +
                 $"Длины окружностей кольца: {Circumference} " +
-                $"Площадь кольца: {Area}";
+                $"Площадь кольца: {Area}");
         }
-
-
     }
 }

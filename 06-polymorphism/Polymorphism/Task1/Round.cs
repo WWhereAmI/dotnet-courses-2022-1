@@ -4,8 +4,6 @@ namespace Task1
 {
     internal class Round : Circle
     {
-        public override string FigureType => "Round";
-
         /// <summary>
         /// Area of the circle
         /// </summary>
@@ -16,19 +14,14 @@ namespace Task1
 
         public override void Draw()
         {
-            Console.WriteLine(this);
-        }
-
-
-
-        public override string ToString()
-        {
-            return $"Фигура: {FigureType} " +
+            Console.WriteLine($"Фигура: {nameof(Round)} " +
                 $"Координаты: ({X}:{Y}) " +
                 $"Радиус: {Radius} " +
                 $"Длина окружности круга: {Circumference} " +
-                $"Площадь круга: {Area}";
+                $"Площадь круга: {Area}");
         }
+
+
 
 
     }

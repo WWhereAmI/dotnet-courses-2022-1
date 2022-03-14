@@ -20,8 +20,6 @@ namespace Task1
         /// </summary>
         public virtual double Circumference { get => 2 * Math.PI * radius; }
 
-        public override string FigureType => "Circle";
-
         /// <summary>
         /// Radius of the circle
         /// </summary>
@@ -48,15 +46,10 @@ namespace Task1
 
         public override void Draw()
         {
-            Console.WriteLine(this);
-        }
-
-        public override string ToString()
-        {
-            return $"Фигура: {FigureType} " +
+            Console.WriteLine($"Фигура: {nameof(Circle)} " +
                 $"Координаты: ({X}:{Y}) " +
                 $"Радиус: {radius} " +
-                $"Длина окружности: {Circumference}";
+                $"Длина окружности: {Circumference}");
         }
     }
 }

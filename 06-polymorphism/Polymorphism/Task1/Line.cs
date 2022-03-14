@@ -4,7 +4,6 @@ namespace Task1
 {
     internal class Line : Figure
     {
-        public override string FigureType => "Line";
 
         /// <summary>
         /// X coordinate begin
@@ -39,12 +38,8 @@ namespace Task1
 
         public override void Draw()
         {
-            Console.WriteLine(this);
+            Console.WriteLine($"Фигура {nameof(Line)} Координаты: ({X1},{Y1}):({X2},{Y2}) Длина отрезка: {Lenght}");
         }
-
-        public override string ToString()
-        {
-            return $"Фигура {FigureType} Координаты: ({X1},{Y1}):({X2},{Y2}) Длина отрезка: {Lenght}";
-        }
+     
     }
 }

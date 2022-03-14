@@ -18,7 +18,14 @@ namespace Task3
 
         public bool MoveNext()
         {
-            index = index < data.Length - 1 ? ++index : 0;
+            //index = index < data.Length - 1 ? ++index : 0;
+           
+            if (index >= data.Length - 1)
+            {
+                return false;
+            }
+           
+            index++;
             return true;
         }
 

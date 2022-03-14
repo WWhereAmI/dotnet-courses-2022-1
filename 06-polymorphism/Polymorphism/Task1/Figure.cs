@@ -7,9 +7,5 @@
         /// </summary>
         public abstract void Draw();
 
-        /// <summary>
-        /// Type of the figure
-        /// </summary>
-        public abstract string FigureType { get; }
     }
 }

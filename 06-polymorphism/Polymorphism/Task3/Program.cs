@@ -15,7 +15,7 @@ namespace Task3
 
             List list = new List(15);
 
-            PrintSeries(list, 5);
+            PrintSeries(list, 16);
             PrintIndexable(list, 5);
 
         }
@@ -27,10 +27,16 @@ namespace Task3
         /// <param name="count"></param>
         static void PrintSeries(ISeries series, int count)
         {
+            series.Reset();
+
             for (int i = 0; i < count; i++)
             {
-                Console.WriteLine(series.GetCurrent()); 
-                series.MoveNext();
+                Console.WriteLine(series.GetCurrent());
+                if (!series.MoveNext())
+                {
+                    break;
+                }
+                
             }
         }
 

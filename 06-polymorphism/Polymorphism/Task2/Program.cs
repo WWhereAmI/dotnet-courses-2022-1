@@ -8,8 +8,7 @@ namespace Task2
         {
             GeometricProgression geometricProgression = new GeometricProgression(1, 2);
 
-            PrintSeries(geometricProgression, 10);
-
+            PrintSeries(geometricProgression, 10);         
         }
 
         /// <summary>
@@ -19,11 +18,16 @@ namespace Task2
         /// <param name="count"></param>
         static void PrintSeries(ISeries value, int count)
         {
+            value.Reset();
+
             for (int i = 0; i < count; i++)
             {
                 Console.WriteLine(value.GetCurrent());
-                value.MoveNext();                
+
+                value.MoveNext();
+                                             
             }
+            
         }
     }
 }

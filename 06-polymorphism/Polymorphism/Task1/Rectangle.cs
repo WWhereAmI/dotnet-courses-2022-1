@@ -7,8 +7,6 @@ namespace Task1
         private int a;
         private int b;
 
-        public override string FigureType => "Rectangle";
-
         /// <summary>
         /// A side
         /// </summary>
@@ -60,12 +58,7 @@ namespace Task1
 
         public override void Draw()
         {
-            Console.WriteLine(this);
-        }
-
-        public override string ToString()
-        {
-            return $"Фигура: {FigureType} Стороны: {A} и {B} Площадь: {Area} Периметр: {Perimeter}";
+            Console.WriteLine($"Фигура: {nameof(Rectangle)} Стороны: {A} и {B} Площадь: {Area} Периметр: {Perimeter}");
         }
     }
 }
