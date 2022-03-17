@@ -119,7 +119,15 @@ namespace Task1
         public T this[int index]
         {
             get { return data[index]; }
-            set { data[index] = value; }
+            set 
+            { 
+                if(index > Length || index < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Index is out of the range");
+                }
+                
+                data[index] = value; 
+            }
         }
 
     }
