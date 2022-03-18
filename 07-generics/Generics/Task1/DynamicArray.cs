@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace Task1
 {
@@ -8,12 +7,14 @@ namespace Task1
     {
         private T[] data;
 
+        private int lenght;
+
         /// <summary>
         /// Gets the total number of the elements contained in the array
         /// </summary>
         public int Length
         {
-            get => data.Where(x => !x.Equals(default(T))).Count();
+            get => lenght;
         }
 
         /// <summary>
@@ -21,8 +22,29 @@ namespace Task1
         /// </summary>
         public int Capacity
         {
-            get => data.Length;
-            private set { }
+            get => data.Length;     
+        }
+
+        public T this[int index]
+        {
+            get 
+            {
+                if (index > lenght || index < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Index is out of the range");
+                }
+
+                return data[index]; 
+            }
+            set
+            {
+                if (index > lenght || index < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Index is out of the range");
+                }
+
+                data[index] = value;
+            }
         }
 
         #region Constructors
@@ -39,6 +61,7 @@ namespace Task1
         public DynamicArray(params T[] sequence)
         {
             data = sequence;
+            lenght = sequence.Length;
         }
         #endregion
 
@@ -48,11 +71,14 @@ namespace Task1
         /// <param name="item"></param>
         public void Add(T item)
         {
-            while (Length >= Capacity)
+            while (lenght >= Capacity)
             {
                 Array.Resize(ref data, Capacity * 2);
             }
-            data[Length] = item;
+            
+            data[lenght] = item;
+
+            lenght++;
         }
 
         /// <summary>
@@ -61,11 +87,13 @@ namespace Task1
         /// <param name="items"></param>
         public void AddRange(T[] items)
         {
-            if (items.Length + Length > Capacity)
+            if (items.Length + lenght > Capacity)
             {
-                Array.Resize(ref data, (items.Length + Length) * 2);
+                Array.Resize(ref data, (items.Length + lenght) * 2);
             }
-            Array.Copy(items, 0, data, Length, items.Length);
+            Array.Copy(items, 0, data, lenght, items.Length);
+
+            lenght += items.Length;
         }
 
         /// <summary>
@@ -75,16 +103,18 @@ namespace Task1
         /// <returns>True if removing was successful, otherwise false</returns>
         public bool Remove(T item)
         {
-            for (int i = 0; i < Length; i++)
+            for (int i = 0; i < lenght; i++)
             {
                 if (data[i].Equals(item))
                 {
-                    for (int j = i; j < Length - 1; j++)
+                    for (int j = i; j < lenght - 1; j++)
                     {
                         data[j] = data[j + 1];
                     }
 
-                    data[Length - 1] = default(T);
+                    data[lenght - 1] = default(T);
+                    lenght--;
+
                     return true;
                 }
             }
@@ -98,37 +128,26 @@ namespace Task1
         /// <param name="index"></param>
         public void Insert(T item, int index)
         {
-            if (index > Length)
+            if (index > lenght)
             {
                 throw new ArgumentOutOfRangeException("Index is out of the range");
             }
 
-            if (Capacity == Length)
+            if (Capacity == lenght)
             {
                 Array.Resize(ref data, Capacity * 2);
             }         
          
-            for (int i = Length; i >= index; i--)
+            for (int i = lenght; i >= index; i--)
             {
                 data[i + 1] = data[i];
             }
 
+            lenght++;
             data[index] = item;
         }
 
-        public T this[int index]
-        {
-            get { return data[index]; }
-            set 
-            { 
-                if(index > Length || index < 0)
-                {
-                    throw new ArgumentOutOfRangeException("Index is out of the range");
-                }
-                
-                data[index] = value; 
-            }
-        }
+        
 
     }
 }
