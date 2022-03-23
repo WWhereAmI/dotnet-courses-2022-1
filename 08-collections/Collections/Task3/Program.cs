@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -27,19 +28,20 @@ namespace Task3
 
         static Dictionary<string, int> CountWords(string text)
         {
-            Dictionary<string, int> wordsFrequency = new Dictionary<string, int>();
+            Dictionary<string, int> wordsFrequency = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
 
             string pattern = @"\b\w+\b";
 
-            foreach (var item in Regex.Matches(text, pattern))
+            foreach (Match item in Regex.Matches(text, pattern))
             {
-                if (!wordsFrequency.ContainsKey(item.ToString().ToLower()))
+                
+                if (!wordsFrequency.ContainsKey(item.Value))
                 {
-                    wordsFrequency.Add(item.ToString().ToLower(), 1);
+                    wordsFrequency.Add(item.Value, 1);
                 }
                 else
                 {
-                    wordsFrequency[item.ToString().ToLower()]++;
+                    wordsFrequency[item.Value]++;
                 }
             }
 

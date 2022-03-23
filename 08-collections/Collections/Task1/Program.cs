@@ -24,9 +24,7 @@ namespace Task1
             ls.AddLast(14);
             ls.AddLast(15);
 
-
-
-            List<int> vs = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+            List<int> vs = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8 };
 
             RemoveEachSecondItem(ls);
             RemoveEachSecondItem(vs);
@@ -34,63 +32,30 @@ namespace Task1
 
         static void RemoveEachSecondItem(ICollection<int> collection)
         {
+            var tempArray = new int[collection.Count];
 
-            #region With using index
-            //int i = 1;
+            collection.CopyTo(tempArray, 0);
 
-            //while (collection.Count > 1)
-            //{
-            //    Console.WriteLine($"{collection[i % collection.Count]} удален");
-            //    collection.RemoveAt(i % collection.Count);
+            int collectionCurrentLength = collection.Count;
+            int i = 1;
 
-            //    i = i >= collection.Count ? 1 : i + 1;
-
-            //}
-            #endregion
-
-
-            int currentIndex = 0;
-            int nextToDelete;
-            int step = 1;            
-            int N = collection.Count;
-
-            if (collection.Count % 2 == 0)
-            {
-                while (collection.Count > 1)
+            while (collection.Count > 1)
+            {               
+                if (i  >= collectionCurrentLength)
                 {
-                    if (currentIndex + 2 * step > N)
-                    {
-                        nextToDelete = (currentIndex + 2 * step) % (currentIndex - 1);
-                        step *= 2;
-                        N = currentIndex;
-                    }
-                    else
-                    {
-                        nextToDelete = (currentIndex + 2 * step) % N == 0 ? currentIndex + 2 * step : (currentIndex + 2 * step) % N;
-                    }
-                    currentIndex = nextToDelete;
+                    i %= collectionCurrentLength;
 
-                    collection.Remove(currentIndex);
-                }
-            }
-            else
-            {
-                while (collection.Count > 1)
-                {
-                    if (currentIndex + 2 * step >= N)
-                    {
-                        nextToDelete = (currentIndex + 2 * step) % (currentIndex + 1);
-                        step *= 2;
-                        N = currentIndex;
-                    }
-                    else
-                    {
-                        nextToDelete = (currentIndex + 2 * step) % N;
-                    }
-                    currentIndex = nextToDelete;
+                    tempArray = new int[collection.Count];
 
-                    collection.Remove(currentIndex);
+                    collection.CopyTo(tempArray, 0);
+
+                    collectionCurrentLength = collection.Count;
                 }
+
+                collection.Remove(tempArray[i]);
+                                  
+                i += 2;
+
             }
         }
     }

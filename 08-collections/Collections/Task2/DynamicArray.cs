@@ -81,7 +81,7 @@ namespace Task2
             #endregion
 
             data = collection.ToArray();
-            lenght = collection.Count();
+            lenght = data.Length;
         }
 
         #endregion
@@ -170,7 +170,7 @@ namespace Task2
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (var item in data)
+            foreach (var item in data.Take(lenght))
             {
                 yield return item;
             }

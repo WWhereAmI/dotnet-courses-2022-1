@@ -7,9 +7,11 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            List<int> list = new List<int> { 1, 2, 3 };
+            //List<int> list = new List<int> { 1, 2, 3 };
 
-            DynamicArray<int> dynArray = new DynamicArray<int>(list);
+            DynamicArray<int> dynArray = new DynamicArray<int>();
+            dynArray.Add(1);
+            dynArray.Add(2);
 
             foreach (var item in dynArray)
             {
