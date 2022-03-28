@@ -8,7 +8,7 @@ namespace Task2
     {
         public event EventHandler<OfficeEventArgs> PersonCame;
         public event EventHandler<OfficeEventArgs> PersonLeft;
-
+        
         private List<Person> employeeList = new List<Person>();
 
         public void Come(Person person)
@@ -33,7 +33,6 @@ namespace Task2
                 PersonLeft -= person.OnPersonLeft;
 
                 PersonLeft?.Invoke(this, new OfficeEventArgs(DateTime.Now, person.Name));
-
                 
             }       
         }
