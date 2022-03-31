@@ -63,7 +63,7 @@ namespace Task1
         {
             if (ReferenceEquals(this, other)) return true;
             if (ReferenceEquals(other, null)) return false;
-            if (GetHashCode() == other.GetHashCode()) return true;
+            if (GetHashCode() != other.GetHashCode()) return false;
 
             return Salary == other.Salary;
 
