@@ -69,10 +69,10 @@ namespace Task1
 
         }
         public override bool Equals(object obj)
-        {
+        {          
             if (ReferenceEquals(this, obj)) return true;
             if (ReferenceEquals(obj, null)) return false;
-            if (GetHashCode() == obj.GetHashCode()) return true;
+            if (GetHashCode() != obj.GetHashCode()) return false;
 
             if (obj is Employee employee)
             {
