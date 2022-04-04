@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Threading;
+using System.Text.Json;
 
 namespace Task2
 {
@@ -10,7 +11,9 @@ namespace Task2
 
         static void Main(string[] args)
         {
-            AuditModeStart();
+            UpdateFoldersInformation();
+
+            AuditModeStart("github");
 
             //StartProgram();
            
@@ -26,17 +29,25 @@ namespace Task2
             {
                 workMode = Console.ReadLine().Trim();
 
+                
+
                 switch (workMode)
                 {
                     case "AuditMode":
-                        AuditModeStart();
+
+                        Console.WriteLine("Input a path for watching");
+
+                        var path = Console.ReadLine();
+
+                        UpdateFoldersInformation();
+
+                        AuditModeStart(path);                
                         break;
+
                     case "RollingBackMode":
                         RollingBackModeStart();
                         break;
-                    case "q":
-                        Console.WriteLine("Stopping the application...");
-                        break;
+
                     default:
                         Console.WriteLine("Incorrect WorkMode");
                         break;
@@ -47,14 +58,23 @@ namespace Task2
 
        
             
-       
+        static async void UpdateFoldersInformation()
+        {
+            var foldersPaths = Directory.GetDirectories(Directory.GetCurrentDirectory(), "", SearchOption.AllDirectories);
 
-        static void AuditModeStart()
+            using(FileStream fs = new FileStream("Folders.json", FileMode.Create))
+            {
+                await JsonSerializer.SerializeAsync(fs, foldersPaths);
+            }
+            
+        }
+
+        static void AuditModeStart(string path)
         {
             Console.WriteLine("Current mode: AuditMode");
 
 
-            Audit audit = new Audit("github");
+            Audit audit = new Audit(path);
             audit.StartWork();
            
 
