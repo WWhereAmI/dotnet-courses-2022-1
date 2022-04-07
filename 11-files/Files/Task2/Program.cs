@@ -11,41 +11,42 @@ namespace Task2
 
         static void Main(string[] args)
         {
-            UpdateFoldersInformation();
+     
+            StartProgram();
 
-            AuditModeStart("github");
-
-            //StartProgram();
-           
         }
 
         static void StartProgram()
         {
+            Console.WriteLine("Input the path to repository");
 
-            Console.WriteLine("Choose mode: 1. AuditMode 2. RollingBackMode");
+            var repositoryPath = Console.ReadLine();
+            if (!Directory.Exists(repositoryPath))
+            {
+                Directory.CreateDirectory(repositoryPath);
+            }
+
+            var backUpFolderPath = "BackUp";
+            if (!Directory.Exists(backUpFolderPath))
+            {
+                throw new DirectoryNotFoundException("BackUp directory doesn't exists");
+            }
 
             string workMode;
+
             do
             {
+                Console.WriteLine("Choose mode: 1. AuditMode 2. RollingBackMode");
                 workMode = Console.ReadLine().Trim();
-
-                
-
+               
                 switch (workMode)
                 {
                     case "AuditMode":
-
-                        Console.WriteLine("Input a path for watching");
-
-                        var path = Console.ReadLine();
-
-                        UpdateFoldersInformation();
-
-                        AuditModeStart(path);                
+                        AuditModeStart(repositoryPath, backUpFolderPath);                
                         break;
 
                     case "RollingBackMode":
-                        RollingBackModeStart();
+                        RollingBackModeStart(repositoryPath, backUpFolderPath);
                         break;
 
                     default:
@@ -53,59 +54,66 @@ namespace Task2
                         break;
                 }
 
-            } while (workMode != "q");
+            } while (workMode != "0");
+
+            Console.WriteLine("Exiting from application...");
         }
 
-       
-            
-        static async void UpdateFoldersInformation()
-        {
-            var foldersPaths = Directory.GetDirectories(Directory.GetCurrentDirectory(), "", SearchOption.AllDirectories);
-
-            using(FileStream fs = new FileStream("Folders.json", FileMode.Create))
-            {
-                await JsonSerializer.SerializeAsync(fs, foldersPaths);
-            }
-            
-        }
-
-        static void AuditModeStart(string path)
+    
+        static private void AuditModeStart(string repositoryPath, string backUpFolderPath)
         {
             Console.WriteLine("Current mode: AuditMode");
+            Console.WriteLine("Print '0' for exit...");
 
-
-            Audit audit = new Audit(path);
+            Audit audit = new Audit(repositoryPath, backUpFolderPath);
             audit.StartWork();
            
-
-
-            while (Console.ReadLine() != "q") ;
-        
-
+            while (Console.ReadLine() != "0");
+            
+            audit.Dispose();      
+            Console.WriteLine("Exiting from AuditMode...");
         }
 
-        static void RollingBackModeStart()
+
+        static private void RollingBackModeStart(string repositoryPath, string backUpFolderPath)
         {
             Console.WriteLine("Current mode: RollingBackMode");
+            Console.WriteLine("Print '0' for exit...");
 
-            string dateToRecover;
+            DateTime dateForRollBack;
+            RollBack rollBack = new RollBack(repositoryPath, backUpFolderPath);
 
             do
             {
-                dateToRecover = Console.ReadLine().Trim();
+                Console.WriteLine("Choose one of these RollBacks and print a date");
+                rollBack.ShowAvailableRollBacks();
 
-                if (DateTime.TryParse(dateToRecover,out DateTime dateTime))
+                if (DateTime.TryParse(Console.ReadLine(),out dateForRollBack))
                 {
-
+                    if (rollBack.RollBackTo(dateForRollBack))
+                    {
+                        Console.WriteLine("RollBack is Successful");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Some troubles with RollBack");
+                    }
+                    
                 }
                 else
                 {
-                    Console.WriteLine("Incorrect DateTime");
+                    Console.WriteLine("Incorrect rollback datetime. Try again...");
                 }
 
+            } while (dateForRollBack != default);
 
-
-            } while (dateToRecover != "q");
+            Console.WriteLine("Exiting from RollingBackMode...");
         }
+
+     
+
+
+
+        
     }
 }

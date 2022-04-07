@@ -1,60 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Text.Json;
 
 namespace Task2
 {
-    internal class Audit
+    internal class Audit : IDisposable
     {
-        
-        private string path;
+        private string repositoryPath;
+        private string backUpFolderpath;
 
-        public Audit(string path)
+        private FileSystemWatcher watcher;
+
+        public Audit(string repositoryPath, string backUpFolderpath)
         {
-            this.path = path;
+            this.repositoryPath = repositoryPath;
+            this.backUpFolderpath = backUpFolderpath;
         }
 
         public void StartWork()
         {
-            foreach (var item in GetAllDirectories())
-            {
-                InitialWatcher(item);
-            }
-            
-        }
-        
-        private List<string> GetAllDirectories()
-        {
-            var json = File.ReadAllText("Folders.json");
-        
-            return JsonSerializer.Deserialize<List<string>>(json);   
+            InitialWatcher(repositoryPath);
         }
 
-        private FileSystemWatcher InitialWatcher(string folder)
+
+        private void InitialWatcher(string folder)
         {
-            FileSystemWatcher watcher = new FileSystemWatcher(folder);
+            watcher = new FileSystemWatcher(folder);
 
             watcher.Changed += FileModified;
             watcher.Created += FileModified;
 
             watcher.Filter = "*.txt";
 
+            watcher.IncludeSubdirectories = true;
             watcher.EnableRaisingEvents = true;
-
-            return watcher;
         }
-
-     
 
 
         private void FileModified(object sender, FileSystemEventArgs e)
         {
-            
-            File.Copy(e.FullPath, $"BackUp\\{e.Name}");
+            LogFile(e.FullPath, Path.GetFileNameWithoutExtension(e.FullPath));
 
-            Console.WriteLine($"{e.FullPath} has been changed");
+            Console.WriteLine($"{e.Name} has been changed");
+        }
+
+        private void LogFile(string filePath, string fileName)
+        {
+            string content;
+
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                content = sr.ReadToEnd();
+            }
+
+            if (!Directory.Exists($"{backUpFolderpath}\\{fileName}"))
+            {
+                Directory.CreateDirectory($"{backUpFolderpath}\\{fileName}");
+            }
+
+            using (StreamWriter sw = new StreamWriter($"{backUpFolderpath}\\{fileName}\\{DateTime.Now.ToString("dd-MM-yyyy HH-mm")}.txt"))
+            {
+                sw.WriteLine(content);
+            }
+        }
+
+        public void Dispose()
+        {
+            watcher.Changed -= FileModified;
+            watcher.Created -= FileModified;
+            watcher.Dispose();
         }
     }
 }
