@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Task2
 {
@@ -11,18 +10,14 @@ namespace Task2
         private List<string> pathMathes = new List<string>();
         private string[] filesList;
 
-        private string reposytoryPath;
-
-        public RollBack(string reposytoryPath, string backUpFolderPath)
+        public RollBack()
         {
-            GetAvailableRollBacks(backUpFolderPath);
-
-            this.reposytoryPath = reposytoryPath;
+            GetAvailableRollBacks();
         }
-      
+
         public void ShowAvailableRollBacks()
-        {           
-            Console.WriteLine(string.Join(" | ",availableRollBacks));
+        {
+            Console.WriteLine(string.Join(" | ", availableRollBacks));
         }
 
         public bool RollBackTo(DateTime dateForRollBack)
@@ -41,9 +36,9 @@ namespace Task2
         /// <summary>
         /// Gets RollBack list without repetitions
         /// </summary>
-        private void GetAvailableRollBacks(string backUpFolderPath)
+        private void GetAvailableRollBacks()
         {
-            filesList = Directory.GetFiles(backUpFolderPath, "*.txt", SearchOption.AllDirectories);
+            filesList = Directory.GetFiles(InitialFile.BackUpFolderPath, InitialFile.FileFilter, SearchOption.AllDirectories);
 
             availableRollBacks = new HashSet<DateTime>();
 
@@ -55,12 +50,12 @@ namespace Task2
         }
 
         private DateTime DateTimeParser(string dateTime)
-        {       
+        {
             return DateTime.ParseExact(dateTime, "dd-MM-yyyy HH-mm",
                                       System.Globalization.CultureInfo.InvariantCulture);
         }
-      
-           
+
+
 
         private void StartRollBack(DateTime dateForRollBack)
         {
@@ -72,7 +67,7 @@ namespace Task2
             {
                 fileToRollBack = $"{Directory.GetParent(path).Name}.txt";
 
-                foreach (var filePath in Directory.GetFiles(reposytoryPath, "*.txt", SearchOption.AllDirectories))
+                foreach (var filePath in Directory.GetFiles(InitialFile.RepositoryPath, InitialFile.FileFilter, SearchOption.AllDirectories))
                 {
                     if (Path.GetFileName(filePath) == fileToRollBack)
                     {
@@ -97,8 +92,8 @@ namespace Task2
                 if (dateForRollBack.ToString("dd-MM-yyyy HH-mm") == Path.GetFileNameWithoutExtension(file))
                 {
                     pathMathes.Add(file);
-                }            
-            }         
+                }
+            }
         }
 
     }

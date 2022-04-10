@@ -1,37 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
-using System.Text.Json;
 
 namespace Task2
 {
     internal class Audit : IDisposable
     {
-        private string repositoryPath;
-        private string backUpFolderpath;
 
         private FileSystemWatcher watcher;
 
-        public Audit(string repositoryPath, string backUpFolderpath)
-        {
-            this.repositoryPath = repositoryPath;
-            this.backUpFolderpath = backUpFolderpath;
-        }
-
         public void StartWork()
         {
-            InitialWatcher(repositoryPath);
+            InitialWatcher();
         }
 
 
-        private void InitialWatcher(string folder)
+        private void InitialWatcher()
         {
-            watcher = new FileSystemWatcher(folder);
+            watcher = new FileSystemWatcher(InitialFile.RepositoryPath);
 
             watcher.Changed += FileModified;
             watcher.Created += FileModified;
 
-            watcher.Filter = "*.txt";
+            watcher.Filter = InitialFile.FileFilter;
 
             watcher.IncludeSubdirectories = true;
             watcher.EnableRaisingEvents = true;
@@ -47,22 +38,16 @@ namespace Task2
 
         private void LogFile(string filePath, string fileName)
         {
-            string content;
+            string dirPath = Path.Combine(InitialFile.BackUpFolderPath, fileName);
 
-            using (StreamReader sr = new StreamReader(filePath))
+            if (!Directory.Exists(dirPath))
             {
-                content = sr.ReadToEnd();
+                Directory.CreateDirectory(dirPath);
             }
 
-            if (!Directory.Exists($"{backUpFolderpath}\\{fileName}"))
-            {
-                Directory.CreateDirectory($"{backUpFolderpath}\\{fileName}");
-            }
+            string logfilePath = Path.Combine(dirPath, $"{DateTime.Now:dd-MM-yyyy HH-mm}.txt");
 
-            using (StreamWriter sw = new StreamWriter($"{backUpFolderpath}\\{fileName}\\{DateTime.Now.ToString("dd-MM-yyyy HH-mm")}.txt"))
-            {
-                sw.WriteLine(content);
-            }
+            File.Copy(filePath, logfilePath, true);
         }
 
         public void Dispose()
