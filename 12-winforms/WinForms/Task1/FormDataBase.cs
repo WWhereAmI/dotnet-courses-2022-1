@@ -10,10 +10,20 @@ using System.Windows.Forms;
 
 namespace Task1
 {
+    public enum SortDirection
+    {
+        asc,
+        desc
+    }
+
     public partial class FormDataBase : Form
     {
         private BindingList<User> userList = new BindingList<User>();
         private BindingList<Award> awardList = new BindingList<Award>();
+
+        public SortDirection currentSortStep = SortDirection.asc;
+
+        
 
         public FormDataBase()
         {
@@ -36,15 +46,19 @@ namespace Task1
 
         private void menuImport_Click(object sender, EventArgs e)
         {
-            userList.ResetBindings();
-            awardList.ResetBindings();
-
+          
             userList = InformationDeserelization<User>.DeserilizeJson("Users.json");
             awardList = InformationDeserelization<Award>.DeserilizeJson("Awards.json");
-            
-            dgvUsersTable.DataSource = userList;
-            dgvAwardsTable.DataSource = awardList;
-                
+
+
+            RefreshInformation(userList, dgvUsersTable);
+            RefreshInformation(awardList, dgvAwardsTable);   
+        }
+
+        private void RefreshInformation<T>(BindingList<T> list, DataGridView view)
+        {
+            list.ResetBindings();
+            view.DataSource = list;
         }
 
         private void menuExport_Click(object sender, EventArgs e)
@@ -52,5 +66,28 @@ namespace Task1
             InformationSerelization<User>.SerelizeList(userList, "Users.json");
             InformationSerelization<Award>.SerelizeList(awardList, "Awards.json");
         }
+
+        private void dgvUsersTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {           
+            OrderColumns(dgvUsersTable, e.ColumnIndex);      
+        }
+
+        private void OrderColumns(DataGridView view, int columnIndex)
+        {
+            if (currentSortStep == SortDirection.asc)
+            { 
+                view.Sort(dgvUsersTable.Columns[columnIndex], ListSortDirection.Descending);           
+                currentSortStep = SortDirection.desc;
+            }
+            else
+            {
+                view.Sort(dgvUsersTable.Columns[columnIndex], ListSortDirection.Ascending);
+                currentSortStep = SortDirection.asc;
+            }
+        }
+
+
+
     }
+
 }

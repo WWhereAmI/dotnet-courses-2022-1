@@ -51,20 +51,22 @@
             this.tcTables.Controls.Add(this.tpUsers);
             this.tcTables.Controls.Add(this.tpAwards);
             this.tcTables.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tcTables.Location = new System.Drawing.Point(0, 24);
+            this.tcTables.Location = new System.Drawing.Point(0, 30);
+            this.tcTables.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tcTables.Multiline = true;
             this.tcTables.Name = "tcTables";
             this.tcTables.SelectedIndex = 0;
-            this.tcTables.Size = new System.Drawing.Size(966, 440);
+            this.tcTables.Size = new System.Drawing.Size(1104, 587);
             this.tcTables.TabIndex = 0;
             // 
             // tpUsers
             // 
             this.tpUsers.Controls.Add(this.dgvUsersTable);
-            this.tpUsers.Location = new System.Drawing.Point(4, 24);
+            this.tpUsers.Location = new System.Drawing.Point(4, 29);
+            this.tpUsers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tpUsers.Name = "tpUsers";
-            this.tpUsers.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUsers.Size = new System.Drawing.Size(958, 412);
+            this.tpUsers.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tpUsers.Size = new System.Drawing.Size(1096, 554);
             this.tpUsers.TabIndex = 0;
             this.tpUsers.Text = "Users";
             this.tpUsers.UseVisualStyleBackColor = true;
@@ -78,19 +80,23 @@
             this.dgvUsersTable.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvUsersTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsersTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvUsersTable.Location = new System.Drawing.Point(3, 3);
+            this.dgvUsersTable.Location = new System.Drawing.Point(3, 4);
+            this.dgvUsersTable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvUsersTable.Name = "dgvUsersTable";
+            this.dgvUsersTable.RowHeadersWidth = 51;
             this.dgvUsersTable.RowTemplate.Height = 25;
-            this.dgvUsersTable.Size = new System.Drawing.Size(952, 406);
+            this.dgvUsersTable.Size = new System.Drawing.Size(1090, 546);
             this.dgvUsersTable.TabIndex = 0;
+            this.dgvUsersTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvUsersTable_ColumnHeaderMouseClick);
             // 
             // tpAwards
             // 
             this.tpAwards.Controls.Add(this.dgvAwardsTable);
-            this.tpAwards.Location = new System.Drawing.Point(4, 24);
+            this.tpAwards.Location = new System.Drawing.Point(4, 29);
+            this.tpAwards.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tpAwards.Name = "tpAwards";
-            this.tpAwards.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAwards.Size = new System.Drawing.Size(958, 412);
+            this.tpAwards.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tpAwards.Size = new System.Drawing.Size(1096, 554);
             this.tpAwards.TabIndex = 1;
             this.tpAwards.Text = "Awards";
             this.tpAwards.UseVisualStyleBackColor = true;
@@ -104,19 +110,23 @@
             this.dgvAwardsTable.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvAwardsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAwardsTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAwardsTable.Location = new System.Drawing.Point(3, 3);
+            this.dgvAwardsTable.Location = new System.Drawing.Point(3, 4);
+            this.dgvAwardsTable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvAwardsTable.Name = "dgvAwardsTable";
+            this.dgvAwardsTable.RowHeadersWidth = 51;
             this.dgvAwardsTable.RowTemplate.Height = 25;
-            this.dgvAwardsTable.Size = new System.Drawing.Size(952, 406);
+            this.dgvAwardsTable.Size = new System.Drawing.Size(1090, 546);
             this.dgvAwardsTable.TabIndex = 0;
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFile});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(966, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(1104, 30);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -126,32 +136,33 @@
             this.menuImport,
             this.menuExport});
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(37, 20);
+            this.menuFile.Size = new System.Drawing.Size(46, 24);
             this.menuFile.Text = "File";
             // 
             // menuImport
             // 
             this.menuImport.Name = "menuImport";
-            this.menuImport.Size = new System.Drawing.Size(180, 22);
+            this.menuImport.Size = new System.Drawing.Size(176, 26);
             this.menuImport.Text = "Import Table";
             this.menuImport.Click += new System.EventHandler(this.menuImport_Click);
             // 
             // menuExport
             // 
             this.menuExport.Name = "menuExport";
-            this.menuExport.Size = new System.Drawing.Size(180, 22);
+            this.menuExport.Size = new System.Drawing.Size(176, 26);
             this.menuExport.Text = "Export Table";
             this.menuExport.Click += new System.EventHandler(this.menuExport_Click);
             // 
             // FormDataBase
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(966, 496);
+            this.ClientSize = new System.Drawing.Size(1104, 661);
             this.Controls.Add(this.tcTables);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormDataBase";
             this.Text = "Nobel Prizes";
             this.Load += new System.EventHandler(this.FormDataBase_Load);
