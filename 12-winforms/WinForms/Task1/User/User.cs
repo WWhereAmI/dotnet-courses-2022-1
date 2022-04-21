@@ -94,7 +94,10 @@ namespace Task1
         }
 
 
-        public User() { }
+        public User() 
+        {
+            ID = GUID++;
+        }
 
         public User(string firstName, string lastName, DateTime birthDate)
         {

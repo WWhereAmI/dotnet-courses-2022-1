@@ -48,7 +48,10 @@ namespace Task1
             }
         }
 
-        public Award() { }
+        public Award() 
+        {
+            ID = GUID++;
+        }
         public Award(string title, string description)
         {
             ID = GUID++;
@@ -64,6 +67,11 @@ namespace Task1
         public override bool Equals(object obj)
         {
             return Title.Equals(obj.ToString());
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(ID, Title);
         }
     }
 }

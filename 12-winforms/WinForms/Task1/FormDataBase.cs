@@ -8,8 +8,14 @@ namespace Task1
 {
     public enum SortDirection
     {
-        asc,
-        desc
+        Asc,
+        Desc
+    }
+
+    public enum ModifyRecord
+    {
+        AddNew,
+        EditExisting
     }
 
     public partial class FormDataBase : Form
@@ -17,7 +23,7 @@ namespace Task1
         private BindingList<User> userList = new BindingList<User>();
         private BindingList<Award> awardList = new BindingList<Award>();
 
-        public SortDirection currentSortStep = SortDirection.asc;
+        public SortDirection currentSortStep = SortDirection.Asc;
 
         public FormDataBase()
         {
@@ -74,19 +80,19 @@ namespace Task1
                         throw new ArgumentOutOfRangeException();
                 }
 
-                if (currentSortStep == SortDirection.asc)
+                if (currentSortStep == SortDirection.Asc)
                 {
                     var list = userList.OrderByDescending(sortRule).ToList();
                     userList = new BindingList<User>(list);
                     RefreshInformation(userList, dgvUsersTable);
-                    currentSortStep = SortDirection.desc;
+                    currentSortStep = SortDirection.Desc;
                 }
                 else
                 {
                     var list = userList.OrderBy(sortRule).ToList();
                     userList = new BindingList<User>(list);
                     RefreshInformation(userList, dgvUsersTable);
-                    currentSortStep = SortDirection.asc;
+                    currentSortStep = SortDirection.Asc;
                 }
             }
         }
@@ -112,78 +118,109 @@ namespace Task1
                         throw new ArgumentOutOfRangeException();
                 }
 
-                if (currentSortStep == SortDirection.asc)
+                if (currentSortStep == SortDirection.Asc)
                 {
                     var list = awardList.OrderByDescending(sortRule).ToList();
                     awardList = new BindingList<Award>(list);
                     RefreshInformation(awardList, dgvAwardsTable);
-                    currentSortStep = SortDirection.desc;
+                    currentSortStep = SortDirection.Desc;
                 }
                 else
                 {
                     var list = awardList.OrderBy(sortRule).ToList();
                     awardList = new BindingList<Award>(list);
                     RefreshInformation(awardList, dgvAwardsTable);
-                    currentSortStep = SortDirection.asc;
+                    currentSortStep = SortDirection.Asc;
                 }
             }
         }
 
         private void menuAddUser_Click(object sender, EventArgs e)
         {
-            UserAdd userAdd = new UserAdd(userList, awardList);
+            UserModify userAdd = new UserModify(new User(), userList, awardList, ModifyRecord.AddNew);
+            RefreshInformation(userList, dgvUsersTable);
             userAdd.ShowDialog();
         }
 
         private void menuEditUser_Click(object sender, EventArgs e)
         {
-            var userToEdit = userList.First(e => e.ID == (int)dgvUsersTable.CurrentRow.Cells[0].Value);
+            if (dgvUsersTable.Rows.Count != 0)
+            {
+                var userToEdit = userList.First(e => e.ID == (int)dgvUsersTable.CurrentRow.Cells[0].Value);
 
-            UserEdit userEdit = new UserEdit(userToEdit, awardList);
-            userEdit.ShowDialog();
+                UserModify userEdit = new UserModify(userToEdit, userList, awardList, ModifyRecord.EditExisting);
+                userEdit.ShowDialog();
 
-            RefreshInformation(userList, dgvUsersTable);
+                RefreshInformation(userList, dgvUsersTable);
+            }
+            else
+            {
+                MessageBox.Show("The table is empty");
+            }
         }
 
         private void menuDeleteUser_Click(object sender, EventArgs e)
         {
-            var userToDelete = userList.First(e => e.ID == (int)dgvUsersTable.CurrentRow.Cells[0].Value);
-
-            var answer = MessageBox.Show($"Delete { userToDelete.FirstName}?", "Deleting User", MessageBoxButtons.YesNo);
-
-            if (answer == DialogResult.Yes)
+            if (dgvUsersTable.Rows.Count != 0)
             {
-                userList.Remove(userToDelete);
+                var userToDelete = userList.First(e => e.ID == (int)dgvUsersTable.CurrentRow.Cells[0].Value);
+
+                var answer = MessageBox.Show($"Delete { userToDelete.FirstName}?", "Deleting User", MessageBoxButtons.YesNo);
+
+                if (answer == DialogResult.Yes)
+                {
+                    userList.Remove(userToDelete);
+                }
+            }
+            else
+            {
+                MessageBox.Show("The table is empty");
             }
         }
 
         private void menuAddAward_Click(object sender, EventArgs e)
         {
-            AwardAdd awardAdd = new AwardAdd(awardList);
+            AwardModify awardAdd = new AwardModify(new Award(), awardList, ModifyRecord.AddNew);
+            RefreshInformation(awardList, dgvAwardsTable);
             awardAdd.ShowDialog();
         }
 
         private void menuEditAward_Click(object sender, EventArgs e)
         {
-            var awardToEdit = awardList.First(e => e.ID == (int)dgvAwardsTable.CurrentRow.Cells[0].Value);
+            if (dgvAwardsTable.Rows.Count != 0)
+            {
+                var awardToEdit = awardList.First(e => e.ID == (int)dgvAwardsTable.CurrentRow.Cells[0].Value);
 
-            AwardEdit awardEdit = new AwardEdit(awardToEdit);
-            awardEdit.ShowDialog();
+                AwardModify awardEdit = new AwardModify(awardToEdit, awardList, ModifyRecord.EditExisting);
+                awardEdit.ShowDialog();
 
-            RefreshInformation(awardList, dgvAwardsTable);
+                RefreshInformation(awardList, dgvAwardsTable);
+            }
+            else
+            {
+                MessageBox.Show("The table is empty");
+            }
+
         }
 
         private void menuDeleteAward_Click(object sender, EventArgs e)
         {
-            var awardToDelete = awardList.First(e => e.ID == (int)dgvAwardsTable.CurrentRow.Cells[0].Value);
-
-            var answer = MessageBox.Show($"Delete { awardToDelete.Title}?", "Deleting Award", MessageBoxButtons.YesNo);
-
-            if (answer == DialogResult.Yes)
+            if (dgvAwardsTable.Rows.Count != 0)
             {
-                awardList.Remove(awardToDelete);
+                var awardToDelete = awardList.First(e => e.ID == (int)dgvAwardsTable?.CurrentRow?.Cells[0]?.Value);
 
-                CascadeDeleteAwards(awardToDelete);
+                var answer = MessageBox.Show($"Delete { awardToDelete.Title}?", "Deleting Award", MessageBoxButtons.YesNo);
+
+                if (answer == DialogResult.Yes)
+                {
+                    awardList.Remove(awardToDelete);
+
+                    CascadeDeleteAwards(awardToDelete);
+                }
+            }
+            else
+            {
+                MessageBox.Show("The table is empty");
             }
         }
 

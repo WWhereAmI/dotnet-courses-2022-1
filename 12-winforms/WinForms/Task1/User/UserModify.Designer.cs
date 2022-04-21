@@ -1,6 +1,6 @@
 ﻿namespace Task1
 {
-    partial class UserAdd
+    partial class UserModify
     {
         /// <summary>
         /// Required designer variable.
@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserAdd));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserModify));
             this.tbFirstNameUser = new System.Windows.Forms.TextBox();
             this.tbLastNameUser = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbBitrhDateUser = new System.Windows.Forms.DateTimePicker();
-            this.btnAddUser = new System.Windows.Forms.Button();
+            this.btnModifyUser = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.lbUserAwards = new System.Windows.Forms.ListBox();
             this.Label4 = new System.Windows.Forms.Label();
@@ -77,12 +77,12 @@
             resources.ApplyResources(this.tbBitrhDateUser, "tbBitrhDateUser");
             this.tbBitrhDateUser.Name = "tbBitrhDateUser";
             // 
-            // btnAddUser
+            // btnModifyUser
             // 
-            resources.ApplyResources(this.btnAddUser, "btnAddUser");
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.UseVisualStyleBackColor = true;
-            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
+            resources.ApplyResources(this.btnModifyUser, "btnModifyUser");
+            this.btnModifyUser.Name = "btnModifyUser";
+            this.btnModifyUser.UseVisualStyleBackColor = true;
+            this.btnModifyUser.Click += new System.EventHandler(this.btnModifyUser_Click);
             // 
             // errorProvider
             // 
@@ -123,7 +123,7 @@
             this.lbAvailableAwards.Name = "lbAvailableAwards";
             this.lbAvailableAwards.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbAvailableAwards_MouseDoubleClick);
             // 
-            // UserAdd
+            // UserModify
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -134,14 +134,15 @@
             this.Controls.Add(this.Label4);
             this.Controls.Add(this.lbUserAwards);
             this.Controls.Add(this.tbBitrhDateUser);
-            this.Controls.Add(this.btnAddUser);
+            this.Controls.Add(this.btnModifyUser);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbLastNameUser);
             this.Controls.Add(this.tbFirstNameUser);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "UserAdd";
+            this.Name = "UserModify";
+            this.Load += new System.EventHandler(this.UserModify_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -155,7 +156,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker tbBitrhDateUser;
-        private System.Windows.Forms.Button btnAddUser;
+        private System.Windows.Forms.Button btnModifyUser;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Label Label4;
         private System.Windows.Forms.ListBox lbUserAwards;

@@ -4,48 +4,54 @@ using System.Windows.Forms;
 
 namespace Task1
 {
-    public partial class UserAdd : Form
+    public partial class UserModify : Form
     {
         private IBindingList users;
-
         private IBindingList awards;
+        private User user;
+        private ModifyRecord workMode;
 
-        public UserAdd(IBindingList users, IBindingList awards)
+
+        public UserModify(User user, IBindingList users, IBindingList awards, ModifyRecord workMode)
         {
             InitializeComponent();
 
             this.awards = awards;
             this.users = users;
+            this.user = user;
 
-            InitialAvailableAwardsList();
+            this.workMode = workMode;
         }
 
-        private void InitialAvailableAwardsList()
-        {
-            foreach (var item in awards)
-            {
-                lbAvailableAwards.Items.Add(item);
-            }
-        }
 
-        private void btnAddUser_Click(object sender, EventArgs e)
+        private void btnModifyUser_Click(object sender, EventArgs e)
         {
             errorProvider.Clear();
 
             if (IsEnititesIsValid())
             {
-                User newUser = new User(tbFirstNameUser.Text, tbLastNameUser.Text, DateTime.Parse(tbBitrhDateUser.Text));
+                user.FirstName = tbFirstNameUser.Text;
+                user.LastName = tbLastNameUser.Text;
+                user.BirthDate = tbBitrhDateUser.Value;
 
-                users.Add(newUser);
+                if (workMode == ModifyRecord.AddNew)
+                { 
+                    users.Add(user);       
+                }
+                else if (workMode == ModifyRecord.EditExisting)
+                {
+                    user.UserAwards.Clear();
+                }
 
                 //Adding awards
-                foreach (var item in lbUserAwards.Items)
+                foreach (var award in lbUserAwards.Items)
                 {
-                    if (item is Award newAward)
+                    if (award is Award newAward)
                     {
-                        newUser.UserAwards.Add(newAward);
+                        user.UserAwards.Add(newAward);
                     }
                 }
+
                 Close();
             }
         }
@@ -88,6 +94,39 @@ namespace Task1
             {
                 lbAvailableAwards.Items.Add(lbUserAwards.SelectedItem);
                 lbUserAwards.Items.Remove(lbUserAwards.SelectedItem);
+            }
+        }
+
+        private void UserModify_Load(object sender, EventArgs e)
+        {
+            if (workMode == ModifyRecord.AddNew)
+            {
+                btnModifyUser.Text = "Add User";
+
+                foreach (var item in awards)
+                {
+                    lbAvailableAwards.Items.Add(item);
+                }
+            }
+            else if (workMode == ModifyRecord.EditExisting)
+            {
+                btnModifyUser.Text = "Save Changes";
+
+                tbFirstNameUser.Text = user.FirstName;
+                tbLastNameUser.Text = user.LastName;
+                tbBitrhDateUser.Value = user.BirthDate;
+
+                foreach (Award item in awards)
+                {
+                    if (user.UserAwards.Contains(item))
+                    {
+                        lbUserAwards.Items.Add(item);
+                    }
+                    else
+                    {
+                        lbAvailableAwards.Items.Add(item);
+                    }
+                }
             }
         }
     }
