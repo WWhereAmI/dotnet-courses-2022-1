@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json;
+﻿using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.ComponentModel;
+using System.Text.Json;
 
 namespace Task1
 {
@@ -12,10 +9,10 @@ namespace Task1
         public static BindingList<T> DeserilizeJson(string fileName)
         {
 
-             string json = File.ReadAllText(fileName);
-            
-             return JsonSerializer.Deserialize<BindingList<T>>(json);
-                       
+            string json = File.ReadAllText(fileName);
+
+            return JsonSerializer.Deserialize<BindingList<T>>(json);
+
         }
 
     }

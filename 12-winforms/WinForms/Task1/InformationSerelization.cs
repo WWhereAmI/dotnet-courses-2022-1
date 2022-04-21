@@ -16,7 +16,7 @@ namespace Task1
                 //Нормально делать return из using?
                 await JsonSerializer.SerializeAsync(fs, list);
             }
-          
+
         }
 
     }
