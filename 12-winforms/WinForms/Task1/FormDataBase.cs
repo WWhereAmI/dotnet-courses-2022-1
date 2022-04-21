@@ -70,6 +70,8 @@ namespace Task1
                         sortRule = e => e.LastName;
                         break;
                     case 3:
+                        sortRule = e => e.BirthDate;
+                        break;
                     case 4:
                         sortRule = e => e.Age;
                         break;
