@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -23,8 +22,6 @@ namespace Task1
         public FormDataBase()
         {
             InitializeComponent();
-
-            menuExport.Enabled = false;
         }
 
         private void FormDataBase_Load(object sender, EventArgs e)
@@ -33,31 +30,10 @@ namespace Task1
             dgvAwardsTable.DataSource = awardList;
         }
 
-        private void menuImport_Click(object sender, EventArgs e)
-        {
-            userList = InformationDeserelization<User>.DeserilizeJson(ConfigurationManager.AppSettings["UserTable"]);
-            awardList = InformationDeserelization<Award>.DeserilizeJson(ConfigurationManager.AppSettings["AwardTable"]);
-
-            RefreshInformation(userList, dgvUsersTable);
-            RefreshInformation(awardList, dgvAwardsTable);
-
-            menuExport.Enabled = true;
-
-            User.GUID = userList.Count + 1;
-            Award.GUID = awardList.Count + 1;
-
-        }
-
         private void RefreshInformation<T>(BindingList<T> list, DataGridView view)
         {
             list.ResetBindings();
             view.DataSource = list;
-        }
-
-        private void menuExport_Click(object sender, EventArgs e)
-        {
-            InformationSerelization<User>.SerelizeList(userList, ConfigurationManager.AppSettings["UserTable"]);
-            InformationSerelization<Award>.SerelizeList(awardList, ConfigurationManager.AppSettings["AwardTable"]);
         }
 
         private void dgvUsersTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -155,8 +131,6 @@ namespace Task1
 
         private void menuAddUser_Click(object sender, EventArgs e)
         {
-            menuExport.Enabled = true;
-
             UserAdd userAdd = new UserAdd(userList, awardList);
             userAdd.ShowDialog();
         }
@@ -185,8 +159,6 @@ namespace Task1
 
         private void menuAddAward_Click(object sender, EventArgs e)
         {
-            menuExport.Enabled = true;
-
             AwardAdd awardAdd = new AwardAdd(awardList);
             awardAdd.ShowDialog();
         }
@@ -212,14 +184,6 @@ namespace Task1
                 awardList.Remove(awardToDelete);
 
                 CascadeDeleteAwards(awardToDelete);
-            }
-        }
-
-        private void CascadeUpdateAwards(Award awardToEdit)
-        {
-            foreach (var user in userList)
-            {
-                user.UserAwards.Remove(awardToEdit);
             }
         }
 

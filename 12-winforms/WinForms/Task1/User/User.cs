@@ -102,7 +102,6 @@ namespace Task1
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
-
         }
     }
 }

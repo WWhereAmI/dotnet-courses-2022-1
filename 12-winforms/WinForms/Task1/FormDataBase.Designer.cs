@@ -44,13 +44,6 @@
             this.menuAddAward = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEditAward = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDeleteAward = new System.Windows.Forms.ToolStripMenuItem();
-            this.Menu = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuImport = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tcTables.SuspendLayout();
             this.tpUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsersTable)).BeginInit();
@@ -58,20 +51,20 @@
             this.tpAwards.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAwardsTable)).BeginInit();
             this.menustrAwards.SuspendLayout();
-            this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcTables
             // 
-            this.tcTables.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tcTables.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcTables.Controls.Add(this.tpUsers);
             this.tcTables.Controls.Add(this.tpAwards);
-            this.tcTables.Location = new System.Drawing.Point(0, 24);
+            this.tcTables.Location = new System.Drawing.Point(0, 0);
             this.tcTables.Multiline = true;
             this.tcTables.Name = "tcTables";
             this.tcTables.SelectedIndex = 0;
-            this.tcTables.Size = new System.Drawing.Size(942, 456);
+            this.tcTables.Size = new System.Drawing.Size(1074, 483);
             this.tcTables.TabIndex = 0;
             // 
             // tpUsers
@@ -80,7 +73,7 @@
             this.tpUsers.Location = new System.Drawing.Point(4, 24);
             this.tpUsers.Name = "tpUsers";
             this.tpUsers.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUsers.Size = new System.Drawing.Size(934, 428);
+            this.tpUsers.Size = new System.Drawing.Size(1066, 455);
             this.tpUsers.TabIndex = 0;
             this.tpUsers.Text = "Users";
             this.tpUsers.UseVisualStyleBackColor = true;
@@ -90,6 +83,9 @@
             this.dgvUsersTable.AllowUserToAddRows = false;
             this.dgvUsersTable.AllowUserToDeleteRows = false;
             this.dgvUsersTable.AllowUserToResizeRows = false;
+            this.dgvUsersTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvUsersTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUsersTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvUsersTable.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -103,13 +99,12 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvUsersTable.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvUsersTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUsersTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvUsersTable.Location = new System.Drawing.Point(3, 3);
             this.dgvUsersTable.Name = "dgvUsersTable";
             this.dgvUsersTable.RowHeadersWidth = 51;
             this.dgvUsersTable.RowTemplate.Height = 25;
-            this.dgvUsersTable.Size = new System.Drawing.Size(928, 422);
+            this.dgvUsersTable.Size = new System.Drawing.Size(1060, 449);
             this.dgvUsersTable.TabIndex = 0;
             this.dgvUsersTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvUsersTable_ColumnHeaderMouseClick);
             // 
@@ -149,7 +144,7 @@
             this.tpAwards.Location = new System.Drawing.Point(4, 24);
             this.tpAwards.Name = "tpAwards";
             this.tpAwards.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAwards.Size = new System.Drawing.Size(934, 428);
+            this.tpAwards.Size = new System.Drawing.Size(1066, 455);
             this.tpAwards.TabIndex = 1;
             this.tpAwards.Text = "Awards";
             this.tpAwards.UseVisualStyleBackColor = true;
@@ -159,18 +154,20 @@
             this.dgvAwardsTable.AllowUserToAddRows = false;
             this.dgvAwardsTable.AllowUserToDeleteRows = false;
             this.dgvAwardsTable.AllowUserToResizeRows = false;
+            this.dgvAwardsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAwardsTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAwardsTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvAwardsTable.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvAwardsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAwardsTable.ContextMenuStrip = this.menustrAwards;
-            this.dgvAwardsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAwardsTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvAwardsTable.Location = new System.Drawing.Point(3, 3);
             this.dgvAwardsTable.Name = "dgvAwardsTable";
             this.dgvAwardsTable.RowHeadersWidth = 51;
             this.dgvAwardsTable.RowTemplate.Height = 25;
-            this.dgvAwardsTable.Size = new System.Drawing.Size(928, 422);
+            this.dgvAwardsTable.Size = new System.Drawing.Size(1060, 449);
             this.dgvAwardsTable.TabIndex = 0;
             this.dgvAwardsTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAwardsTable_ColumnHeaderMouseClick);
             // 
@@ -204,58 +201,13 @@
             this.menuDeleteAward.Text = "Delete Award";
             this.menuDeleteAward.Click += new System.EventHandler(this.menuDeleteAward_Click);
             // 
-            // Menu
-            // 
-            this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.Menu.Location = new System.Drawing.Point(0, 0);
-            this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(942, 24);
-            this.Menu.TabIndex = 2;
-            this.Menu.Text = "menuStrip2";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuImport,
-            this.toolStripMenuItem4,
-            this.menuExport});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // menuImport
-            // 
-            this.menuImport.Name = "menuImport";
-            this.menuImport.Size = new System.Drawing.Size(140, 22);
-            this.menuImport.Text = "Import File...";
-            this.menuImport.Click += new System.EventHandler(this.menuImport_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(137, 6);
-            // 
-            // menuExport
-            // 
-            this.menuExport.Name = "menuExport";
-            this.menuExport.Size = new System.Drawing.Size(140, 22);
-            this.menuExport.Text = "Export File...";
-            this.menuExport.Click += new System.EventHandler(this.menuExport_Click);
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            // 
             // FormDataBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 509);
-            this.Controls.Add(this.Menu);
+            this.ClientSize = new System.Drawing.Size(1074, 509);
             this.Controls.Add(this.tcTables);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.Menu;
             this.MinimumSize = new System.Drawing.Size(958, 548);
             this.Name = "FormDataBase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -268,10 +220,7 @@
             this.tpAwards.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAwardsTable)).EndInit();
             this.menustrAwards.ResumeLayout(false);
-            this.Menu.ResumeLayout(false);
-            this.Menu.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -290,12 +239,5 @@
         private System.Windows.Forms.ToolStripMenuItem menuAddAward;
         private System.Windows.Forms.ToolStripMenuItem menuEditAward;
         private System.Windows.Forms.ToolStripMenuItem menuDeleteAward;
-        private System.Windows.Forms.MenuStrip Menu;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem menuImport;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem menuExport;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

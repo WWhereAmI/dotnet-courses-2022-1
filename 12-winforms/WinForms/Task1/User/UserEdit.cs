@@ -40,7 +40,7 @@ namespace Task1
         {
             errorProvider.Clear();
 
-            if (IsEnititesIsValid())
+            if (IsEnititesValid())
             {
                 userToEdit.FirstName = tbFirstNameUser.Text;
                 userToEdit.LastName = tbLastNameUser.Text;
@@ -60,7 +60,7 @@ namespace Task1
             }
         }
 
-        private bool IsEnititesIsValid()
+        private bool IsEnititesValid()
         {
             if (string.IsNullOrWhiteSpace(tbFirstNameUser.Text))
             {
