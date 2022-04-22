@@ -13,10 +13,8 @@ namespace Task1
 
         public static int GUID { get; set; } = 0;
 
-        [JsonPropertyName("id")]
         public int ID { get; set; }
 
-        [JsonPropertyName("first_name")]
         public string FirstName
         {
             get => firstName;
@@ -36,7 +34,6 @@ namespace Task1
             }
         }
 
-        [JsonPropertyName("last_name")]
         public string LastName
         {
             get => lastName;
@@ -54,8 +51,6 @@ namespace Task1
                 lastName = value;
             }
         }
-
-        [JsonPropertyName("birth_date")]
         public DateTime BirthDate
         {
             get => birthDate;
@@ -69,17 +64,12 @@ namespace Task1
                 birthDate = value;
             }
         }
-
-        [JsonPropertyName("age")]
         public int Age
         {
             get => DateTime.Now.Subtract(BirthDate).Days / 365;
         }
-
-        [JsonPropertyName("user_awards")]
         public List<Award> UserAwards { get; set; } = new List<Award>();
 
-        [JsonIgnore]
         public string UserAwardsList
         {
             get

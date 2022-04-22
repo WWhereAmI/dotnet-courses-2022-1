@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.Json.Serialization;
 
 namespace Task1
 {
@@ -10,10 +9,8 @@ namespace Task1
 
         public static int GUID { get; set; } = 0;
 
-        [JsonPropertyName("id")]
         public int ID { get; set; }
 
-        [JsonPropertyName("title")]
         public string Title
         {
             get => title;
@@ -32,8 +29,6 @@ namespace Task1
                 title = value;
             }
         }
-
-        [JsonPropertyName("description")]
         public string Description
         {
             get => description;
@@ -48,7 +43,7 @@ namespace Task1
             }
         }
 
-        public Award() 
+        public Award()
         {
             ID = GUID++;
         }
