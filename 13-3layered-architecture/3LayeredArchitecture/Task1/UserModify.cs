@@ -2,27 +2,45 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using Entities;
+using BLL.Main;
 
 namespace Task1
 {
     public partial class UserModify : Form
     {
-        private IBindingList users;
-        private IBindingList awards;
         private User user;
         private ModifyRecord workMode;
 
+        private int userID;
+        private PersonBL personBL;
+        private AwardBL awardBL;
 
-        public UserModify(User user, IBindingList users, IBindingList awards, ModifyRecord workMode)
+
+        public UserModify(PersonBL personBL, AwardBL awardBL, ModifyRecord workMode = ModifyRecord.AddNew)
         {
             InitializeComponent();
 
-            this.awards = awards;
-            this.users = users;
-            this.user = user;
+            this.personBL = personBL;
+            this.workMode = workMode;
+            this.awardBL = awardBL;    
+            
+
+            user = new User();
+        }
+
+        public UserModify(PersonBL personBL, AwardBL awardBL, int userID, ModifyRecord workMode = ModifyRecord.EditExisting)
+        {
+            InitializeComponent();
 
             this.workMode = workMode;
+            this.personBL = personBL;
+            this.awardBL = awardBL;
+
+            this.userID = userID;
+
+            user = personBL.GetUser(userID);
         }
+
 
 
         private void btnModifyUser_Click(object sender, EventArgs e)
@@ -37,7 +55,7 @@ namespace Task1
 
                 if (workMode == ModifyRecord.AddNew)
                 { 
-                    users.Add(user);       
+                    personBL.AddUser(user);       
                 }
                 else if (workMode == ModifyRecord.EditExisting)
                 {
@@ -104,7 +122,7 @@ namespace Task1
             {
                 btnModifyUser.Text = "Add User";
 
-                foreach (var item in awards)
+                foreach (var item in awardBL.GetAll())
                 {
                     lbAvailableAwards.Items.Add(item);
                 }
@@ -117,7 +135,7 @@ namespace Task1
                 tbLastNameUser.Text = user.LastName;
                 tbBitrhDateUser.Value = user.BirthDate;
 
-                foreach (Award item in awards)
+                foreach (Award item in personBL.GetUserAwards(userID))
                 {
                     if (user.UserAwards.Contains(item))
                     {

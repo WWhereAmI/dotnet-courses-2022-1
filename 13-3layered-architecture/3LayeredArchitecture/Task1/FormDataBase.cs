@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BLL.Main;
+using Entities;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Entities;
-using BLL.Main;
 
 namespace Task1
 {
@@ -26,7 +26,7 @@ namespace Task1
         private PersonBL personBL = new PersonBL();
         private AwardBL awardBL = new AwardBL();
 
-        
+
 
         public SortDirection currentSortStep = SortDirection.Asc;
 
@@ -144,8 +144,10 @@ namespace Task1
 
         private void menuAddUser_Click(object sender, EventArgs e)
         {
-            UserModify userAdd = new UserModify(new User(), personBL.GetAll(), awardBL.GetAll(), ModifyRecord.AddNew);
+            UserModify userAdd = new UserModify(personBL, awardBL);
+
             RefreshInformation(personBL.GetAll(), dgvUsersTable);
+
             userAdd.ShowDialog();
         }
 
@@ -153,9 +155,10 @@ namespace Task1
         {
             if (dgvUsersTable.Rows.Count != 0)
             {
-                var userToEdit = personBL.GetAll().First(e => e.ID == (int)dgvUsersTable.CurrentRow.Cells[0].Value);
+                int userID = (int)dgvUsersTable.CurrentRow.Cells[0].Value;
 
-                UserModify userEdit = new UserModify(userToEdit, personBL.GetAll(), awardBL.GetAll(), ModifyRecord.EditExisting);
+                UserModify userEdit = new UserModify(personBL, awardBL, userID);
+
                 userEdit.ShowDialog();
 
                 RefreshInformation(personBL.GetAll(), dgvUsersTable);
@@ -170,7 +173,9 @@ namespace Task1
         {
             if (dgvUsersTable.Rows.Count != 0)
             {
-                var userToDelete = personBL.GetAll().First(e => e.ID == (int)dgvUsersTable.CurrentRow.Cells[0].Value);
+                int userID = (int)dgvUsersTable.CurrentRow.Cells[0].Value;
+
+                var userToDelete = personBL.GetUser(userID);
 
                 var answer = MessageBox.Show($"Delete { userToDelete.FirstName}?", "Deleting User", MessageBoxButtons.YesNo);
 
@@ -198,7 +203,7 @@ namespace Task1
         {
             if (dgvAwardsTable.Rows.Count != 0)
             {
-                var currentID = (int)dgvAwardsTable.CurrentRow.Cells[0].Value;
+                int currentID = (int)dgvAwardsTable.CurrentRow.Cells[0].Value;
 
                 AwardModify awardEdit = new AwardModify(awardBL, currentID, ModifyRecord.EditExisting);
                 awardEdit.ShowDialog();
@@ -216,16 +221,16 @@ namespace Task1
         {
             if (dgvAwardsTable.Rows.Count != 0)
             {
-                var currentID = (int)dgvAwardsTable.CurrentRow.Cells[0].Value;
+                int currentID = (int)dgvAwardsTable.CurrentRow.Cells[0].Value;
                 var awardToDelete = awardBL.GetAward(currentID);
-               
+
                 var answer = MessageBox.Show($"Delete { awardToDelete.Title}?", "Deleting Award", MessageBoxButtons.YesNo);
 
                 if (answer == DialogResult.Yes)
                 {
                     awardBL.RemoveAward(awardToDelete);
 
-                    CascadeDeleteAwards(awardToDelete);
+                    //CascadeDeleteAwards(awardToDelete);
                 }
             }
             else
@@ -234,13 +239,13 @@ namespace Task1
             }
         }
 
-        private void CascadeDeleteAwards(Award awardToDelete)
-        {
-            foreach (var user in personBL.GetAll())
-            {
-                user.UserAwards.Remove(awardToDelete);
-            }
-        }
+        //private void CascadeDeleteAwards(Award awardToDelete)
+        //{
+        //    foreach (var user in personBL.GetAll())
+        //    {
+        //        user.UserAwards.Remove(awardToDelete);
+        //    }
+        //}
     }
 
 }
