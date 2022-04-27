@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task1", "Task1\Task1.csproj", "{FC28246C-649F-4431-BA02-39FA4B1CE06D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DB93F34E-E6CD-424A-8EC8-C36F3FD1D5C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{0FC2D665-E757-42DA-BCC6-378F26458C18}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{ADAF40F1-C3BE-4F67-A737-3B805AB7D1F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{334E2026-07BB-4E3D-924E-E9C416CAFB90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PL", "PL", "{D3224EE4-8E85-483D-8AB1-17F00037ECA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Icons", "Icons", "{5D2C672D-2C7F-4808-89C1-F1A8F057C79F}"
+	ProjectSection(SolutionItems) = preProject
+		Task1\Icons\AwardIcon.ico = Task1\Icons\AwardIcon.ico
+		Task1\Icons\icons8-monkas-48.ico = Task1\Icons\icons8-monkas-48.ico
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL.Main", "BLL\BLL.Main.csproj", "{863C7099-F95A-4433-B26E-913E8B4B7778}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC28246C-649F-4431-BA02-39FA4B1CE06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC28246C-649F-4431-BA02-39FA4B1CE06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC28246C-649F-4431-BA02-39FA4B1CE06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC28246C-649F-4431-BA02-39FA4B1CE06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FC2D665-E757-42DA-BCC6-378F26458C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FC2D665-E757-42DA-BCC6-378F26458C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FC2D665-E757-42DA-BCC6-378F26458C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FC2D665-E757-42DA-BCC6-378F26458C18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863C7099-F95A-4433-B26E-913E8B4B7778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{863C7099-F95A-4433-B26E-913E8B4B7778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{863C7099-F95A-4433-B26E-913E8B4B7778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863C7099-F95A-4433-B26E-913E8B4B7778}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0FC2D665-E757-42DA-BCC6-378F26458C18} = {DB93F34E-E6CD-424A-8EC8-C36F3FD1D5C7}
+		{5D2C672D-2C7F-4808-89C1-F1A8F057C79F} = {DB93F34E-E6CD-424A-8EC8-C36F3FD1D5C7}
+		{863C7099-F95A-4433-B26E-913E8B4B7778} = {ADAF40F1-C3BE-4F67-A737-3B805AB7D1F8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D428E2D-B4E7-4618-9F23-17990846F835}
+	EndGlobalSection
+EndGlobal
