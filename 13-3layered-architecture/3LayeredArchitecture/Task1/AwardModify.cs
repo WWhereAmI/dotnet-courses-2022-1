@@ -1,7 +1,7 @@
 ﻿using BLL.Main;
 using Entities;
+using Interfaces;
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Task1
@@ -11,28 +11,28 @@ namespace Task1
         private Award award;
         private ModifyRecord workMode;
 
-        private AwardBL awardBL;
+        private IAwardBL awardBL;
 
 
-        public AwardModify(AwardBL awardBL, ModifyRecord workMode = ModifyRecord.AddNew)
+        public AwardModify(IAwardBL awardBL)
         {
             InitializeComponent();
 
-            this.workMode = workMode;
+            workMode = ModifyRecord.AddNew;
+
             this.awardBL = awardBL;
 
             award = new Award();
-            
         }
 
-        public AwardModify(AwardBL awardBL, int awardID, ModifyRecord workMode = ModifyRecord.EditExisting)
+        public AwardModify(IAwardBL awardBL, int awardID)
         {
             InitializeComponent();
 
-            this.workMode = workMode;
+            workMode = ModifyRecord.EditExisting;
+
             this.awardBL = awardBL;
 
-            
             award = awardBL.GetAward(awardID);
         }
 
@@ -49,7 +49,6 @@ namespace Task1
                 {
                     awardBL.AddAward(award);
                 }
-
 
                 Close();
             }

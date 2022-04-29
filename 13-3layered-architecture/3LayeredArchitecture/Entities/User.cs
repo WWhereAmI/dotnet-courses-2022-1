@@ -9,9 +9,6 @@ namespace Entities
         private string firstName;
         private string lastName;
         private DateTime birthDate;
-
-        public static int GUID { get; set; } = 0;
-
         public int ID { get; set; }
 
         public string FirstName
@@ -65,7 +62,7 @@ namespace Entities
         }
         public int Age
         {
-            get => DateTime.Now.Subtract(BirthDate).Days / 365;
+            get => new DateTime(DateTime.Now.Subtract(BirthDate).Ticks).Year;
         }
 
         public List<Award> UserAwards { get; set; } = new List<Award>();
@@ -74,23 +71,23 @@ namespace Entities
         {
             get
             {
-                StringBuilder result = new StringBuilder();
-                foreach (var item in UserAwards)
-                {
-                    result.Append("-" + item + "\n");
-                }
-                return result.ToString();
+                return string.Join(Environment.NewLine, UserAwards);
+                //StringBuilder result = new StringBuilder();
+                //foreach (var item in UserAwards)
+                //{
+                //    result.Append("-" + item + "\n");
+                //}
+                //return result.ToString();
             }
         }
 
         public User()
         {
-            ID = GUID++;
+
         }
 
         public User(string firstName, string lastName, DateTime birthDate)
         {
-            ID = GUID++;
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;

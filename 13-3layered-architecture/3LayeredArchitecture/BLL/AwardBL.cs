@@ -1,31 +1,47 @@
-﻿using Entities;
-using System.ComponentModel;
-using System.Linq;
+﻿using DAL.List;
+using Entities;
+using Interfaces;
+using System.Collections.Generic;
 
 namespace BLL.Main
 {
-    public class AwardBL
+    public class AwardBL : IAwardBL
     {
-        private BindingList<Award> awardList = new BindingList<Award>();
 
-        public BindingList<Award> GetAll()
+        private IAwardDAO awardDAO;
+
+        public AwardBL(IAwardDAO awardDAO)
         {
-            return awardList;
+            this.awardDAO = awardDAO;
+        }
+
+        public IEnumerable<Award> GetAll()
+        {
+            return awardDAO.GetAll();
         }
 
         public Award GetAward(int awardID)
         {
-            return awardList.First(e => e.ID == awardID);
+            return awardDAO.GetAward(awardID);
         }
 
         public void AddAward(Award award)
         {
-            awardList.Add(award);
+            awardDAO.AddAward(award);
         }
 
-        public void RemoveAward(Award award)
+        public void RemoveAward(Award award, IPersonBL personBL)
         {
-            awardList.Remove(award);
+            awardDAO.RemoveAward(award);
+
+            personBL.RemoveAward(award);
+
         }
+        public void OrderAwardByField(int fieldIndex)
+        {
+            awardDAO.OrderAwardByField(fieldIndex);
+        }
+
+
     }
 }

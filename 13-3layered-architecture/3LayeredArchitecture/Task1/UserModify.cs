@@ -3,42 +3,41 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Entities;
 using BLL.Main;
+using Interfaces;
 
 namespace Task1
 {
     public partial class UserModify : Form
     {
+        private IAwardBL awardBL;
+        private IPersonBL personBL;
+
         private User user;
         private ModifyRecord workMode;
-
-        private int userID;
-        private PersonBL personBL;
-        private AwardBL awardBL;
-
-
-        public UserModify(PersonBL personBL, AwardBL awardBL, ModifyRecord workMode = ModifyRecord.AddNew)
+    
+        public UserModify(IPersonBL personBL, IAwardBL awardBL)
         {
             InitializeComponent();
 
+            workMode = ModifyRecord.AddNew;
+
             this.personBL = personBL;
-            this.workMode = workMode;
             this.awardBL = awardBL;    
             
-
             user = new User();
         }
 
-        public UserModify(PersonBL personBL, AwardBL awardBL, int userID, ModifyRecord workMode = ModifyRecord.EditExisting)
+        public UserModify(IPersonBL personBL, IAwardBL awardBL, int userID)
         {
             InitializeComponent();
 
-            this.workMode = workMode;
+            workMode = ModifyRecord.EditExisting;
+            
             this.personBL = personBL;
             this.awardBL = awardBL;
 
-            this.userID = userID;
-
             user = personBL.GetUser(userID);
+
         }
 
 
@@ -62,12 +61,12 @@ namespace Task1
                     user.UserAwards.Clear();
                 }
 
-                //Adding awards
+                //Adding awards from UI
                 foreach (var award in lbUserAwards.Items)
                 {
                     if (award is Award newAward)
-                    {
-                        user.UserAwards.Add(newAward);
+                    {                       
+                        personBL.AddUserAward(user, newAward);
                     }
                 }
 
@@ -122,9 +121,9 @@ namespace Task1
             {
                 btnModifyUser.Text = "Add User";
 
-                foreach (var item in awardBL.GetAll())
+                foreach (var award in awardBL.GetAll())
                 {
-                    lbAvailableAwards.Items.Add(item);
+                    lbAvailableAwards.Items.Add(award);
                 }
             }
             else if (workMode == ModifyRecord.EditExisting)
@@ -135,15 +134,15 @@ namespace Task1
                 tbLastNameUser.Text = user.LastName;
                 tbBitrhDateUser.Value = user.BirthDate;
 
-                foreach (Award item in personBL.GetUserAwards(userID))
+                foreach (Award award in awardBL.GetAll())
                 {
-                    if (user.UserAwards.Contains(item))
+                    if (user.UserAwards.Contains(award))
                     {
-                        lbUserAwards.Items.Add(item);
+                        lbUserAwards.Items.Add(award);
                     }
                     else
                     {
-                        lbAvailableAwards.Items.Add(item);
+                        lbAvailableAwards.Items.Add(award);
                     }
                 }
             }

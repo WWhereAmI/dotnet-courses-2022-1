@@ -6,9 +6,6 @@ namespace Entities
     {
         private string title;
         private string description;
-
-        public static int GUID { get; set; } = 0;
-
         public int ID { get; set; }
 
         public string Title
@@ -45,11 +42,11 @@ namespace Entities
 
         public Award()
         {
-            ID = GUID++;
+
         }
+
         public Award(string title, string description)
         {
-            ID = GUID++;
             Title = title;
             Description = description;
         }

@@ -1,43 +1,63 @@
-﻿using System;
+﻿using DAL.List;
 using Entities;
+using Interfaces;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 
 namespace BLL.Main
 {
-    public class PersonBL
+    public class PersonBL : IPersonBL
     {
-        private BindingList<User> userList = new BindingList<User>();
 
-        public BindingList<User> GetAll()
+        private IPersonDAO personDAO;
+
+        public PersonBL(IPersonDAO personDAO)
         {
-            return userList;
+            this.personDAO = personDAO;
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return personDAO.GetAll();
         }
 
         public User GetUser(int userID)
         {
-            return userList.First(e => e.ID == userID);
+            return personDAO.GetUser(userID);
         }
 
         public void AddUser(User user)
         {
-            userList.Add(user);
+            personDAO.AddUser(user);
         }
 
         public void RemoveUser(User user)
         {
-            userList.Remove(user);
+            personDAO.RemoveUser(user);
         }
 
-        public IEnumerable<Award> GetUserAwards(int userID)
+        /// <summary>
+        /// Deleting award from all users
+        /// </summary>
+        /// <param name="award"></param>
+        public void RemoveAward(Award award)
         {
-            var currentUser = GetUser(userID);
+            personDAO.RemoveAward(award);
+        }
 
-            foreach (var award in currentUser.UserAwards)
-            {
-                yield return award;
-            }
+
+        public void AddUserAward(User user, Award award)
+        {
+            personDAO.AddUserAward(user, award);
+        }
+
+        public IEnumerable<Award> GetUserAwards(User user)
+        {
+            return personDAO.GetUserAwards(user);
+        }
+
+        public void OrderUserByField(int fieldIndex)
+        {
+            personDAO.OrderUserByField(fieldIndex);
         }
 
     }
