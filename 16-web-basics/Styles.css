@@ -1,0 +1,39 @@
+html,body{
+    padding: 0;
+    margin: 0;
+    min-width: 1000px;
+}
+
+.fixed-block{
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+    
+}
+
+header{
+    background-color: #4B0082;
+    color: white;
+    padding: 20px;
+
+    
+
+    display: flex;
+}
+
+.links{
+    color: white;
+    text-decoration: none;
+
+    font-size: 30px;
+    font-style: solid;
+    
+    display: inline-block;
+}
+
+#icon{
+    float: left;
+    align-self: center;
+}
+
+
