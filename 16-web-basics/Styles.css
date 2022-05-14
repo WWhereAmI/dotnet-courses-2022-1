@@ -1,39 +1,180 @@
 html,body{
     padding: 0;
     margin: 0;
-    min-width: 1000px;
+    height: 100%;
+    min-width: 1400px;  
 }
 
 .fixed-block{
-    width: 960px;
-    margin: 0 auto;
-    position: relative;
-    
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    padding: 0 42px;
+    align-items: center;
 }
 
-header{
+#page{
+    display: flex;
+    flex-direction: column;
+}
+
+header,footer{
     background-color: #4B0082;
     color: white;
-    padding: 20px;
-
+    flex: 0 0 auto;
     
+    width: 100%;
+}
 
+main{
+    flex: 1 0 auto;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td{
+    border: 1px solid black;
+    padding: 5px;
+    table-layout:fixed
+}
+
+td:last-child{
+    border: 0;
+}
+
+.button-cell{
     display: flex;
+}
+
+td{
+    text-align: end;
+}
+
+tr:hover, th{
+    background: #e8edff;
+}
+
+#submit-button{
+    margin-top: 50px;
+
+    font-size: 40px;
+    width: 300px;
+
+    border-radius: 10px;
+}
+
+#add-button{
+    margin-top: 20px;
+    font-size: 40px;
+    width: 50px;
+
+    border-radius: 100%;
+}
+
+#submit-button, #add-button{
+    background-color: #4B0082;
+    border: none;
+    color: white;
+    text-align: center;
+}
+
+#update-button{
+    background-color: green;
+}
+
+#delete-button{
+    background-color: red;
+}
+
+
+#update-button, #delete-button{
+    width: 100%;
+
+    color: white;
+    text-align: center;
+
+    height: 30px;
+    margin-left: 5px;
+
+    border-radius: 5px;
+}
+
+
+#add-button:hover, #delete-button:hover, #update-button:hover, #submit-button:hover{
+    background-color: purple;
+    cursor: pointer;
+}
+
+#table-caption{
+    margin: 50px auto;
+    font-family: 'Bradley Hand', cursive;
+    font-size: 40px;
+}
+
+#table-section{
+    flex-direction: column;
+}
+
+#user-redact-section{
+    margin: auto;
+    text-align: center;
+}
+
+.input-elements{
+    display: block;
+    margin: 75px;
+    height: 50px;
+    width: 500px;
+    font: 25px bold
 }
 
 .links{
     color: white;
     text-decoration: none;
-
-    font-size: 30px;
-    font-style: solid;
-    
-    display: inline-block;
 }
 
-#icon{
-    float: left;
-    align-self: center;
+.links:hover{
+    color: aqua;
+}
+
+#nav-menu .links{
+    font-size: 45px;
+    letter-spacing: 2px;
+    font-family: 'Bradley Hand', cursive;
+    padding-left: 150px;
+}
+
+footer .fixed-block{
+    text-align: right;
+    justify-content: right;
+}
+
+#nav-menu-contacts{
+    display: flex;
+    flex-direction: column; 
+}
+
+#tgimg, #vkimg{
+    padding-left: 15px;
+}
+
+#copyright{
+    margin: auto;
+}
+
+#nav-menu-contacts .links{
+    padding: 10px;
+    font-family: 'Bradley Hand', cursive;
+    font-size: 20px;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    letter-spacing: 5px;
 }
 
 
