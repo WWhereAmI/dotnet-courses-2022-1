@@ -5,10 +5,12 @@ USE FilmAwards
 CREATE PROCEDURE AddUser
 	@FirstName NVARCHAR(30),
 	@LastName NVARCHAR(50),
-	@BirthDate DATE
+	@BirthDate DATE,
+	@NewID INT OUT
 AS
 INSERT INTO Users(FirstName, LastName, BithDate)
 	VALUES(@FirstName, @LastName, @BirthDate)
+SET @NewID = SCOPE_IDENTITY()
 
 -------------------------------------
 CREATE PROCEDURE RemoveUser
@@ -21,14 +23,16 @@ DELETE FROM Users WHERE
 CREATE PROCEDURE GetUser
 	@UserID INT
 AS
-SELECT * FROM Users
-	WHERE ID = @UserID
+SELECT Users.ID, Users.FirstName,Users.LastName, Users.BithDate, Awards.ID, Awards.Title, Awards.[Description] 
+	FROM UserAwards RIGHT JOIN Users ON Users.ID = UserAwards.UserID
+	LEFT JOIN Awards ON Awards.ID = UserAwards.AwardID
+		WHERE Users.ID = @UserID
 
 -------------------------------------
 CREATE PROCEDURE GetUserAwards
 	@UserID INT
 AS
-SELECT A.Title FROM UserAwards AS UA
+SELECT A.ID, A.Title, A.Description FROM UserAwards AS UA
 	JOIN Awards AS A ON UA.AwardID = A.ID
 	WHERE UA.UserID = @UserID
 
@@ -48,39 +52,36 @@ DELETE FROM UserAwards
 	WHERE AwardID = @AwardID
 
 -------------------------------------
-CREATE PROCEDURE OrderUserByFieldASC
-	@FieldIndex INT
+CREATE PROCEDURE OrderUserByField
+	@FieldIndex INT,
+	@SortStep INT
 AS
-if @FieldIndex = 1
-	SELECT * FROM Users
-	ORDER BY 1
-if @FieldIndex = 2
-	SELECT * FROM Users
-	ORDER BY 2
-if @FieldIndex = 3
-	SELECT * FROM Users
-	ORDER BY 3
-if @FieldIndex = 4
-	SELECT * FROM Users
-	ORDER BY 4
-
--------------------------------------
-CREATE PROCEDURE OrderUserByFieldDESC
-	@FieldIndex INT
-AS
-if @FieldIndex = 1
-	SELECT * FROM Users
-	ORDER BY 1 DESC
-if @FieldIndex = 2
-	SELECT * FROM Users
-	ORDER BY 2 DESC
-if @FieldIndex = 3
-	SELECT * FROM Users
-	ORDER BY 3 DESC
-if @FieldIndex = 4
-	SELECT * FROM Users
-	ORDER BY 4 DESC
-
+if @SortStep = 1
+	if @FieldIndex = 0
+		SELECT * FROM Users
+		ORDER BY 1
+	if @FieldIndex = 1
+		SELECT * FROM Users
+		ORDER BY 2
+	if @FieldIndex = 2
+		SELECT * FROM Users
+		ORDER BY 3
+	if @FieldIndex = 3
+		SELECT * FROM Users
+		ORDER BY 4
+else if @SortStep = 2
+	if @FieldIndex = 0
+		SELECT * FROM Users
+		ORDER BY 1 DESC
+	if @FieldIndex = 1
+		SELECT * FROM Users
+		ORDER BY 2 DESC
+	if @FieldIndex = 2
+		SELECT * FROM Users
+		ORDER BY 3 DESC
+	if @FieldIndex = 3
+		SELECT * FROM Users
+		ORDER BY 4 DESC
 
 -------------------------------------
 CREATE PROCEDURE UpdateUser

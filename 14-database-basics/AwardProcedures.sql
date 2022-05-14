@@ -26,33 +26,30 @@ SELECT * FROM Awards
 	WHERE ID = @AwardID
 
 -------------------------------------
-CREATE PROCEDURE OrderAwardByFieldASC
-	@FieldIndex INT
+CREATE PROCEDURE OrderAwardByField
+	@FieldIndex INT,
+	@SortStep INT
 AS
-if @FieldIndex = 1
-	SELECT * FROM Awards
-	ORDER BY 1
-if @FieldIndex = 2
-	SELECT * FROM Awards
-	ORDER BY 2
-if @FieldIndex = 3
-	SELECT * FROM Awards
-	ORDER BY 3
-
--------------------------------------
-CREATE PROCEDURE OrderAwardByFieldDESC
-	@FieldIndex INT
-AS
-if @FieldIndex = 1
-	SELECT * FROM Awards
-	ORDER BY 1 DESC
-if @FieldIndex = 2
-	SELECT * FROM Awards
-	ORDER BY 2 DESC
-if @FieldIndex = 3
-	SELECT * FROM Awards
-	ORDER BY 3 DESC
-
+if @SortStep = 1
+	if @FieldIndex = 0
+		SELECT * FROM Awards
+		ORDER BY 1
+	if @FieldIndex = 1
+		SELECT * FROM Awards
+		ORDER BY 2
+	if @FieldIndex = 2
+		SELECT * FROM Awards
+		ORDER BY 3
+else if @SortStep = 2
+	if @FieldIndex = 0
+		SELECT * FROM Awards
+		ORDER BY 1 DESC
+	if @FieldIndex = 1
+		SELECT * FROM Awards
+		ORDER BY 2 DESC
+	if @FieldIndex = 2
+		SELECT * FROM Awards
+		ORDER BY 3 DESC
 
 -------------------------------------
 CREATE PROCEDURE UpdateAward
@@ -62,5 +59,5 @@ CREATE PROCEDURE UpdateAward
 AS
 UPDATE Awards 
 	SET Title = @Title,
-		[Description] = @Title
+		[Description] = @Description
 	WHERE ID = @AwardID
