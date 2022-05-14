@@ -1,0 +1,4 @@
+{
+  "ConnectionString": "Data Source=localhost;Initial Catalog=FilmAwards;Integrated Security=True",
+  "CurrentDAO": "DataBase"
+}

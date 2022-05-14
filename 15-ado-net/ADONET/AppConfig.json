@@ -1,0 +1,3 @@
+{
+  "ConnectionString": "Data Source=alexanderpc\\sqlalex;Initial Catalog=FilmAwards;Integrated Security=True"
+}

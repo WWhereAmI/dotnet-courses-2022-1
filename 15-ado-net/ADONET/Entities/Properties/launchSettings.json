@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Entities": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\EPAM\\dotnet-courses-2022-1\\15-ado-net\\3LayeredArchitecture\\WinForms.PL"
+    }
+  }
+}
