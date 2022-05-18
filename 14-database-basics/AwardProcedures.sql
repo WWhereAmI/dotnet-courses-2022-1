@@ -31,6 +31,7 @@ CREATE PROCEDURE OrderAwardByField
 	@SortStep INT
 AS
 if @SortStep = 1
+begin
 	if @FieldIndex = 0
 		SELECT * FROM Awards
 		ORDER BY 1
@@ -40,7 +41,9 @@ if @SortStep = 1
 	if @FieldIndex = 2
 		SELECT * FROM Awards
 		ORDER BY 3
+end
 else if @SortStep = 2
+begin
 	if @FieldIndex = 0
 		SELECT * FROM Awards
 		ORDER BY 1 DESC
@@ -50,6 +53,7 @@ else if @SortStep = 2
 	if @FieldIndex = 2
 		SELECT * FROM Awards
 		ORDER BY 3 DESC
+end
 
 -------------------------------------
 CREATE PROCEDURE UpdateAward

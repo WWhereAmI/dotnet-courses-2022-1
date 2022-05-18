@@ -46,10 +46,11 @@ INSERT INTO UserAwards(UserID, AwardID)
 
 -------------------------------------
 CREATE PROCEDURE RemoveUserAward
-	@AwardID INT
+	@AwardID INT,
+	@UserID INT
 AS
 DELETE FROM UserAwards 
-	WHERE AwardID = @AwardID
+	WHERE AwardID = @AwardID AND UserID = @UserID
 
 -------------------------------------
 CREATE PROCEDURE OrderUserByField
@@ -57,6 +58,7 @@ CREATE PROCEDURE OrderUserByField
 	@SortStep INT
 AS
 if @SortStep = 1
+begin
 	if @FieldIndex = 0
 		SELECT * FROM Users
 		ORDER BY 1
@@ -69,7 +71,9 @@ if @SortStep = 1
 	if @FieldIndex = 3
 		SELECT * FROM Users
 		ORDER BY 4
+end
 else if @SortStep = 2
+begin
 	if @FieldIndex = 0
 		SELECT * FROM Users
 		ORDER BY 1 DESC
@@ -82,6 +86,7 @@ else if @SortStep = 2
 	if @FieldIndex = 3
 		SELECT * FROM Users
 		ORDER BY 4 DESC
+end
 
 -------------------------------------
 CREATE PROCEDURE UpdateUser
