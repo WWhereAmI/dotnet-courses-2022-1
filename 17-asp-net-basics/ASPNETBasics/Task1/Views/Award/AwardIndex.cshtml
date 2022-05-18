@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Award>
+
+@{
+    ViewData["Title"] = "AwardIndex";
+}
+
+ <main>
+        <section class="fixed-block" id="table-section">
+            <h1 id="table-caption">Таблица наград</h1>
+
+            <table>
+                <tr>
+                    <th width="5%" class="table-headers"> <a asp-controller = "Award" asp-action="AwardOrder" asp-route-fieldIndex=0 asp-route-sortDirection="@ViewBag.SortOrder">ID</a></th>
+                    <th width="30%" class="table-headers"><a asp-controller = "Award" asp-action="AwardOrder" asp-route-fieldIndex=1 asp-route-sortDirection="@ViewBag.SortOrder">Title</a></th>
+                    <th width="50%" class="table-headers"><a asp-controller = "Award" asp-action="AwardOrder" asp-route-fieldIndex=2 asp-route-sortDirection="@ViewBag.SortOrder">Description</a></th>
+                    <th style="border:0 !important; display: none"></th> 
+                    
+                </tr>
+               @foreach (var award in Model)
+                {
+                    <tr>
+                        <td>@award.ID</td>
+                        <td>@award.Title</td>
+                        <td>@award.Description</td>
+
+                        <td class="button-cell">
+
+                            <div class="update-bttn">
+                                <a id="update-button" asp-controller="Award" asp-action="AwardUpdate" asp-route-awardID="@award.ID">Обновить</a>
+                            </div>      
+                            
+                            <form class="delete-bttn" asp-controller="Award" asp-action="AwardDelete" asp-route-awardID = "@award.ID">
+                                <button id="delete-button" type="submit" onclick="return confirm('Уверены, что хотите удалить награду?')">Удалить</button>
+                            </form>
+                        </td>
+                        </tr>  
+                }              
+            </table>
+            <form asp-controller="Award" asp-action="AwardAdd" method="get">
+                <button id="add-button">+</button>
+            </form>
+        </section>
+
+    </main>
+
+
+   

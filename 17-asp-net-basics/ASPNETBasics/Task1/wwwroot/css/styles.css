@@ -1,0 +1,265 @@
+html,body{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    min-width: 1400px;  
+}
+
+.fixed-block{
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    padding: 0 42px;
+    align-items: center;
+}
+
+#page{
+    display: flex;
+    flex-direction: column;
+}
+
+header,footer{
+    background-color: #4B0082;
+    color: white;
+    flex: 0 0 auto;
+    
+    width: 100%;
+}
+
+main{
+    flex: 1 0 auto;
+}
+
+table{
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #DCDCDC;
+    padding: 5px;
+    table-layout: fixed;
+}
+
+td:last-child{
+    border: 0;
+    
+}
+
+.button-cell {
+    display: flex;
+    width: 100%;
+    height:100%;
+
+    align-items:center;
+}
+
+td {
+    text-align: end;
+}
+
+
+tr:hover, th{
+    background: #e8edff;
+}
+
+#submit-button{
+    margin: 50px 0;
+
+    font-size: 40px;
+    border-radius: 10px;
+}
+
+#add-button {
+    margin: 30px 0;
+    font-size: 40px;
+    width: 50px;
+    border-radius: 100%;
+}
+
+#submit-button, #add-button{
+    background-color: #4B0082;
+    border: none;
+    color: white;
+    text-align: center;
+}
+
+#delete-button{
+    background-color: red;
+}
+
+#update-button {
+    text-decoration: none;
+    width: 100%;
+
+    padding-top:20px;
+    
+    color: white;
+    border-radius: 5px;
+}
+
+.update-bttn {
+    background-color: green;
+    border-radius: 5px;
+
+    text-align:center;
+    
+    display:flex;
+
+    height:60px;
+}
+
+.delete-bttn, .update-bttn {
+    width: 50%;
+}
+
+
+.delete-bttn{
+    padding-left: 5px;
+}
+
+#delete-button {
+    width: 100%;
+    color: white;   
+    text-align: center;
+    height: 60px;
+    border-radius: 5px;
+}
+
+{
+    text-decoration:none;
+    color:black;
+
+}
+.table-headers {
+    padding: 0;
+    margin: 0;
+    height:50px;
+}
+
+.table-headers a {
+    text-decoration: none;
+    display:flex;
+    height: 100%;
+
+    flex-direction:column;
+    justify-content:center;
+    align-content:center;
+    
+}
+
+.table-headers a:hover {
+    cursor: pointer;
+    background-color: ghostwhite;
+}
+
+
+#add-button:hover, #delete-button:hover, #update-button:hover, #submit-button:hover{
+    background-color: purple;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    font-size: 50px;
+    align-content:center;
+
+    display:inline-block; 
+
+    padding-top:50px;
+   
+
+}
+
+.data-input {
+    display: flex;
+    flex-direction: row;
+}
+
+#table-caption {
+    margin: 50px auto;
+    font-family: 'Bradley Hand', cursive;
+    font-size: 40px;
+}
+
+#table-section{
+    flex-direction: column;
+}
+
+#redact-section{
+    margin: auto;
+    text-align: center;
+}
+
+.input-elements{
+    display: block;
+    margin: 75px 20px 75px 75px;
+    height: 50px;
+    width: 500px;
+    font: 25px bold
+}
+
+#award-container {
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 100%;
+   
+}
+
+#current-awards, #awailable-awards {
+    width: 50%;
+    overflow: auto;
+    height: 300px;
+}
+
+.links {
+    color: white;
+    text-decoration: none;
+}
+
+.links:hover{
+    color: aqua;
+}
+
+#nav-menu .links{
+    font-size: 45px;
+    letter-spacing: 2px;
+    font-family: 'Bradley Hand', cursive;
+    padding-left: 150px;
+}
+
+footer .fixed-block{
+    text-align: right;
+    justify-content: right;
+}
+
+#nav-menu-contacts{
+    display: flex;
+    flex-direction: column; 
+}
+
+#tgimg, #vkimg{
+    padding-left: 15px;
+}
+
+#copyright{
+    margin: auto;
+}
+
+#nav-menu-contacts .links{
+    padding: 10px;
+    font-family: 'Bradley Hand', cursive;
+    font-size: 20px;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    letter-spacing: 5px;
+}
+
+

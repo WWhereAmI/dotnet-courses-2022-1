@@ -1,0 +1,46 @@
+﻿@using DAL.DB;
+@using Interfaces;
+@model UserViewModel
+
+@{
+    ViewData["Title"] = "UserAdd";
+    IAwardDAO awardDAO = new AwardDAO();
+}
+
+<main>
+    <section class="fixed-block">
+        <form id="redact-section" asp-controller="User" asp-action="UserAdd" method="post">
+            <input asp-for=ID type="hidden"/>
+
+            <div class="data-input">
+                <input asp-for=FirstName class="input-elements" id="FirstName" placeholder="Введите Имя">      
+                <span class="error-message" asp-validation-for="FirstName"></span>
+            </div>
+            <div class="data-input">
+                <input asp-for=LastName class="input-elements" id="LastName" placeholder="Введите фамилию">
+                <span class="error-message" asp-validation-for="LastName"></span>
+            </div>           
+            <div class="data-input"> 
+                <input asp-for=BirthDate type="date" value="@DateTime.Now" min="@DateTime.Now.Year-150" max="@DateTime.Now"  class="input-elements" id="BirthDate">
+                
+             </div>
+            
+            <div id="award-container">
+                <div id="awailable-awards" >
+                    <fieldset>
+                        <legend>Доступные награды</legend>
+                        @foreach (var award in awardDAO.GetAll())
+                        {
+                            <input id="@award.Title" name="awardIDList" value="@award.ID" type="checkbox"/><label for="@award.Title">@award.Title</label>
+                            <br />
+                        }              
+                    </fieldset>
+                </div>                
+            </div>
+                            
+            <button id="submit-button" type="submit">Создать пользователя</button>               
+        </form>
+    </section>
+</main>
+
+

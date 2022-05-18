@@ -1,0 +1,20 @@
+﻿@model AwardViewModel
+
+@{
+    ViewData["Title"] = "AwardUpdate";
+}
+
+<main>
+    <section class="fixed-block">
+        <form id="redact-section" asp-controller="Award" asp-action="AwardUpdate">
+            <input asp-for=ID type="hidden"/>
+            <div class="data-input">
+                <input asp-for="Title" value="@Model.Title" class="input-elements"   placeholder="Введите награду"/>      
+                <span class="error-message" asp-validation-for="Title"></span>
+            </div>
+            <input asp-for="Description" value="@Model.Description" class="input-elements"  placeholder="Введите описание"/>
+            <button id="submit-button" type="submit">Сохранить</button>
+        </form>
+    </section>
+</main>
+

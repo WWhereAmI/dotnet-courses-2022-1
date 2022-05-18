@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="~/css/styles.css">
+
+    <title>@ViewData["Title"]</title>
+</head>
+<body id="page">
+
+    <header>
+        <section class="fixed-block">
+            <div>
+                <img src="~/img/trophy.png" alt="Картинки нет" width="100px" height="100px">  
+            </div>  
+            <nav id="nav-menu">
+                <a class="links" asp-controller="User" asp-action="UserIndex">Пользователи</a>
+                <a class="links" asp-controller="Award" asp-action="AwardIndex">Награды</a>  
+            </nav>    
+        </section>
+    </header>
+
+    <main>
+        
+        @RenderBody()
+        
+    </main>
+
+
+    <footer>
+        <section class="fixed-block">
+            <div id="copyright">
+                &copy; Все права защищены, наверное. 2022
+            </div>
+            <nav id="nav-menu-contacts">
+                    <a target="_blank" class="links" href="https://vk.com/alexanderpkv">
+                        Телеграм
+                        <img id ="tgimg" src="~/img/tgico.png" alt="Картинки нет" width="50px" height="50px">
+                    </a>
+                    <a target="_blank" class="links" href="https://t.me/WWhereAmI">
+                        Вк
+                        <img id ="vkimg" src="~/img/vkico.png" alt="Картинки нет" width="50px" height="50px">
+                    </a>
+            </nav> 
+        </section>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "UserIndex";
+}
+
+<main>
+    <section class="fixed-block" id="table-section">
+        <h1 id="table-caption">Таблица пользователей</h1>
+
+        <table>
+            <tr>
+                <th width="5%" class="table-headers"><a asp-controller="User" asp-action="UserOrder" asp-route-fieldIndex=0 asp-route-sortDirection="@ViewBag.SortDirection">ID</a></th>
+                <th width="20%" class="table-headers"><a asp-controller="User" asp-action="UserOrder" asp-route-fieldIndex=1 asp-route-sortDirection="@ViewBag.SortDirection">First Name</a></th>
+                <th width="20%" class="table-headers"><a asp-controller="User" asp-action="UserOrder" asp-route-fieldIndex=2 asp-route-sortDirection="@ViewBag.SortDirection">Last Name</a></th>
+                <th width="10%" class="table-headers"><a asp-controller="User" asp-action="UserOrder" asp-route-fieldIndex=3 asp-route-sortDirection="@ViewBag.SortDirection">BirthDay</a></th>
+                <th width="5%" class="table-headers"><a asp-controller="User" asp-action="UserOrder" asp-route-fieldIndex=4 asp-route-sortDirection="@ViewBag.SortDirection">Age</a></th>
+                <th width="25%" class="table-headers">User Awards</th>
+            </tr>
+            
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.ID</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.BirthDate.ToShortDateString()</td>
+                    <td>@user.Age</td>
+                    <td>
+                        <ul>
+                        @foreach (var award in user.UserAwards)
+                        {
+                            <li>@award</li>                                                
+                        }
+                        </ul>
+                   
+                    </td>
+                        <td class="button-cell">
+                        
+                        <div class="update-bttn">
+                            <a id="update-button" asp-controller="User" asp-action="UserUpdate" asp-route-userID = "@user.ID" >Обновить</a>
+                        </div>
+                                                   
+                        <form class="delete-bttn" asp-controller = "User" asp-action = "UserDelete" asp-route-userID = "@user.ID">
+                            <button id="delete-button"  type="submit" onclick="return confirm('Уверены, что хотите удалить пользователя?')">Удалить</button>    
+                        </form>
+                                     
+                    </td>
+                </tr>
+            }           
+        </table>
+        <form asp-controller="User" asp-action="UserAdd" method="get">
+            <button id="add-button">+</button>
+        </form>
+    </section>
+</main>
+
