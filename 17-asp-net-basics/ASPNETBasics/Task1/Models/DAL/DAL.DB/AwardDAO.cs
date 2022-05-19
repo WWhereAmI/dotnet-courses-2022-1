@@ -1,5 +1,6 @@
 ﻿using Entities;
 using Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -27,7 +28,7 @@ namespace DAL.DB
 
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("Title", SqlDbType.NVarChar).Value = award.Title;
-                command.Parameters.Add("Description", SqlDbType.NVarChar).Value = award.Description;
+                command.Parameters.Add("Description", SqlDbType.NVarChar).Value = award.Description == null ? (object)DBNull.Value : award.Description;
 
                 command.ExecuteNonQuery();
             }
@@ -144,7 +145,7 @@ namespace DAL.DB
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("AwardID", SqlDbType.Int).Value = awardID;
                 command.Parameters.Add("Title", SqlDbType.NVarChar).Value = title;
-                command.Parameters.Add("Description", SqlDbType.NVarChar).Value = description;
+                command.Parameters.Add("Description", SqlDbType.NVarChar).Value = description == null ? (object)DBNull.Value : description;
 
                 command.ExecuteNonQuery();
             }

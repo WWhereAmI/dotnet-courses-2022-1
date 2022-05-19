@@ -31,7 +31,7 @@ namespace Entities
             get => description;
             set
             {
-                if (value.Length > 250)
+                if (value?.Length > 250)
                 {
                     throw new ArgumentOutOfRangeException("The max Description length is 250");
                 }

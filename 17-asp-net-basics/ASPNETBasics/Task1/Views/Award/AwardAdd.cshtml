@@ -7,11 +7,12 @@
 <main>
     <section class="fixed-block"  >
         <form id="redact-section" asp-controller="Award" asp-action="AwardAdd">
-            <input asp-for="Title" class="input-elements"   placeholder="Введите награду"/>     
-            <div class="data-input">
+            <div class="data-input">              
+                <input asp-for="Title" class="input-elements"   placeholder="Введите награду"/>  
                 <span class="error-message" asp-validation-for="Title"></span>
-                <input asp-for="Description" class="input-elements"  placeholder="Введите описание"/>
             </div>
+            <input asp-for="Description" class="input-elements"  placeholder="Введите описание"/>
+            
             <button id="submit-button" type="submit">Создать награду</button>
         </form>
     </section>

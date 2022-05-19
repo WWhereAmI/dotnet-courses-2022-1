@@ -48,14 +48,8 @@ namespace Task1.Controllers
                 return View();
             }
 
-
-
-            var rewardToAdd = new Award
-            {
-                ID = award.ID,
-                Title = award.Title,
-                Description = award.Description,
-            };
+            var rewardToAdd = new Award(award.Title, award?.Description);
+ 
 
             awardBL.AddAward(rewardToAdd);
 
