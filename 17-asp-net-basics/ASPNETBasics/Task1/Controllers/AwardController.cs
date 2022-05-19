@@ -1,5 +1,4 @@
-﻿using DAL.DB;
-using Entities;
+﻿using Entities;
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,12 +6,19 @@ namespace Task1.Controllers
 {
     public class AwardController : Controller
     {
-        IAwardDAO awardDAO = new AwardDAO();
+        IPersonBL personBL;
+        IAwardBL awardBL;
+
+        public AwardController(IPersonBL personBL, IAwardBL awardBL)
+        {
+            this.personBL = personBL;
+            this.awardBL = awardBL;
+        }
 
         [HttpGet]
         public IActionResult AwardIndex()
         {
-            var awards = awardDAO.GetAll();
+            var awards = awardBL.GetAll();
 
             return View(awards);
         }
@@ -20,9 +26,9 @@ namespace Task1.Controllers
         [HttpPost]
         public IActionResult AwardDelete(int awardID)
         {
-            var award = awardDAO.GetAward(awardID);
+            var award = awardBL.GetAward(awardID);
 
-            awardDAO.RemoveAward(award);
+            awardBL.RemoveAward(award, personBL);
 
             return RedirectToAction("AwardIndex");
         }
@@ -30,6 +36,7 @@ namespace Task1.Controllers
         [HttpGet]
         public IActionResult AwardAdd()
         {
+
             return View(new AwardViewModel());
         }
 
@@ -41,6 +48,8 @@ namespace Task1.Controllers
                 return View();
             }
 
+
+
             var rewardToAdd = new Award
             {
                 ID = award.ID,
@@ -48,7 +57,7 @@ namespace Task1.Controllers
                 Description = award.Description,
             };
 
-            awardDAO.AddAward(rewardToAdd);
+            awardBL.AddAward(rewardToAdd);
 
             return RedirectToAction("AwardIndex");
         }
@@ -56,7 +65,7 @@ namespace Task1.Controllers
         [HttpGet]
         public IActionResult AwardUpdate(int awardID)
         {
-            var award = awardDAO.GetAward(awardID);
+            var award = awardBL.GetAward(awardID);
 
             var rewardToUpdate = new AwardViewModel(award);
 
@@ -71,7 +80,7 @@ namespace Task1.Controllers
                 return View(award);
             }
 
-            awardDAO.UpdateAward(award.ID, award.Title, award.Description);
+            awardBL.UpdateAward(award.ID, award.Title, award.Description);
 
             return RedirectToAction("AwardIndex");
         }
@@ -79,11 +88,11 @@ namespace Task1.Controllers
         [HttpGet]
         public IActionResult AwardOrder(int fieldIndex, SortDirection sortDirection = SortDirection.Desc)
         {
-            awardDAO.GetAll();
+            awardBL.GetAll();
 
             ViewBag.SortOrder = sortDirection == SortDirection.Asc ? SortDirection.Desc : SortDirection.Asc;
 
-            var awards = awardDAO.OrderAwardByField(fieldIndex, sortDirection);
+            var awards = awardBL.OrderAwardByField(fieldIndex, sortDirection);
 
             return View("AwardIndex", awards);
         }

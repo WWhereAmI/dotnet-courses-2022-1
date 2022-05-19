@@ -1,8 +1,6 @@
-﻿using DAL.DB;
-using Entities;
+﻿using Entities;
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Task1.Controllers
@@ -10,16 +8,20 @@ namespace Task1.Controllers
 
     public class UserController : Controller
     {
-        IPersonDAO personDAO = new PersonDAO();
-        IAwardDAO awardDAO = new AwardDAO();
+        IPersonBL personBL;
+        IAwardBL awardBL;
 
-        IEnumerable<User> users;
+        public UserController(IPersonBL personBL, IAwardBL awardBL)
+        {
+            this.personBL = personBL;
+            this.awardBL = awardBL;
+        }
 
         [HttpGet]
 
         public IActionResult UserIndex()
         {
-            var users = personDAO.GetAll();
+            var users = personBL.GetAll();
 
             return View(users);
         }
@@ -27,9 +29,9 @@ namespace Task1.Controllers
         [HttpPost]
         public IActionResult UserDelete(int userID)
         {
-            var user = personDAO.GetUser(userID);
+            var user = personBL.GetUser(userID);
 
-            personDAO.RemoveUser(user);
+            personBL.RemoveUser(user);
 
             return RedirectToAction("UserIndex");
         }
@@ -37,6 +39,8 @@ namespace Task1.Controllers
         [HttpGet]
         public IActionResult UserAdd()
         {
+            ViewBag.AllAwards = awardBL.GetAll();
+
             return View(new UserViewModel());
         }
 
@@ -45,6 +49,8 @@ namespace Task1.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.AllAwards = awardBL.GetAll();
+
                 return View();
             }
 
@@ -58,15 +64,15 @@ namespace Task1.Controllers
                 UserAwards = user.UserAwards
             };
 
-            int userID = personDAO.AddUser(userToAdd);
+            int userID = personBL.AddUser(userToAdd);
 
-            userToAdd = personDAO.GetUser(userID);
+            userToAdd = personBL.GetUser(userID);
 
-            foreach (var award in awardDAO.GetAll())
+            foreach (var award in awardBL.GetAll())
             {
                 if (awardIDList.Contains(award.ID))
                 {
-                    personDAO.AddUserAward(userToAdd, award);
+                    personBL.AddUserAward(userToAdd, award);
                 }
             }
 
@@ -76,7 +82,9 @@ namespace Task1.Controllers
         [HttpGet]
         public IActionResult UserUpdate(int userID)
         {
-            var user = personDAO.GetUser(userID);
+            ViewBag.AllAwards = awardBL.GetAll();
+
+            var user = personBL.GetUser(userID);
 
             var userToUpdate = new UserViewModel(user);
 
@@ -88,7 +96,9 @@ namespace Task1.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var newUser = personDAO.GetUser(user.ID);
+                ViewBag.AllAwards = awardBL.GetAll();
+
+                var newUser = personBL.GetUser(user.ID);
 
                 user = new UserViewModel(newUser);
 
@@ -96,7 +106,7 @@ namespace Task1.Controllers
 
             }
 
-            personDAO.UpdateUser(user.ID, user.FirstName, user.LastName, user.BirthDate);
+            personBL.UpdateUser(user.ID, user.FirstName, user.LastName, user.BirthDate);
 
             var userToUpdate = new User
             {
@@ -107,17 +117,17 @@ namespace Task1.Controllers
                 UserAwards = user.UserAwards
             };
 
-            userToUpdate = personDAO.GetUser(userToUpdate.ID);
+            userToUpdate = personBL.GetUser(userToUpdate.ID);
 
-            foreach (var award in awardDAO.GetAll())
+            foreach (var award in awardBL.GetAll())
             {
                 if (awardIDList.Contains(award.ID) && !userToUpdate.UserAwards.Contains(award))
                 {
-                    personDAO.AddUserAward(userToUpdate, award);
+                    personBL.AddUserAward(userToUpdate, award);
                 }
                 else if (userToUpdate.UserAwards.Contains(award) && !awardIDList.Contains(award.ID))
                 {
-                    personDAO.RemoveAward(userToUpdate.ID, award);
+                    personBL.RemoveAward(userToUpdate.ID, award);
                 }
 
             }
@@ -128,11 +138,11 @@ namespace Task1.Controllers
         [HttpGet]
         public IActionResult UserOrder(int fieldIndex, SortDirection sortDirection = SortDirection.Desc)
         {
-            personDAO.GetAll();
+            personBL.GetAll();
 
-            ViewBag.SortDirection = sortDirection == SortDirection.Asc ? SortDirection.Desc : SortDirection.Asc;    
+            ViewBag.SortDirection = sortDirection == SortDirection.Asc ? SortDirection.Desc : SortDirection.Asc;
 
-            users = personDAO.OrderUserByField(fieldIndex, sortDirection);
+            var users = personBL.OrderUserByField(fieldIndex, sortDirection);
 
             return View("UserIndex", users);
         }

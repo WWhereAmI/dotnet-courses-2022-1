@@ -127,11 +127,6 @@ tr:hover, th{
     border-radius: 5px;
 }
 
-{
-    text-decoration:none;
-    color:black;
-
-}
 .table-headers {
     padding: 0;
     margin: 0;
@@ -142,6 +137,8 @@ tr:hover, th{
     text-decoration: none;
     display:flex;
     height: 100%;
+
+    color:black;
 
     flex-direction:column;
     justify-content:center;
@@ -192,9 +189,9 @@ tr:hover, th{
     text-align: center;
 }
 
-.input-elements{
+.input-elements {
     display: block;
-    margin: 75px 20px 75px 75px;
+    margin: 50px 20px 50px 50px;
     height: 50px;
     width: 500px;
     font: 25px bold

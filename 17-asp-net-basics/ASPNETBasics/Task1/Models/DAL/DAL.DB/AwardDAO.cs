@@ -46,7 +46,7 @@ namespace DAL.DB
                 awardList = GetAwardList(reader);
             }
 
-            return awardList;   
+            return awardList;
         }
 
         public Award GetAward(int awardID)
@@ -76,7 +76,7 @@ namespace DAL.DB
         {
             using (var connection = new SqlConnection(stringBuilder.ConnectionString))
             {
-                
+
                 using (var command = new SqlCommand("OrderAwardByField", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
@@ -96,14 +96,14 @@ namespace DAL.DB
                     var reader = command.ExecuteReader();
 
                     awardList = GetAwardList(reader);
-                }          
-                return awardList;                        
+                }
+                return awardList;
             }
         }
 
         private List<Award> GetAwardList(SqlDataReader reader)
-        {          
-            List<Award> awards = new List<Award>();  
+        {
+            List<Award> awards = new List<Award>();
 
             while (reader.Read())
             {
@@ -131,7 +131,7 @@ namespace DAL.DB
                 command.Parameters.Add("AwardID", SqlDbType.Int).Value = award.ID;
 
                 command.ExecuteNonQuery();
-            }        
+            }
         }
 
         public void UpdateAward(int awardID, string title, string description)

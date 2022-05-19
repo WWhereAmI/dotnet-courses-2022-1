@@ -1,10 +1,7 @@
-﻿@using DAL.DB;
-@using Interfaces;
-@model UserViewModel
+﻿@model UserViewModel
 
 @{
     ViewData["Title"] = "UserAdd";
-    IAwardDAO awardDAO = new AwardDAO();
 }
 
 <main>
@@ -29,7 +26,7 @@
                 <div id="awailable-awards" >
                     <fieldset>
                         <legend>Доступные награды</legend>
-                        @foreach (var award in awardDAO.GetAll())
+                        @foreach (var award in ViewBag.AllAwards)
                         {
                             <input id="@award.Title" name="awardIDList" value="@award.ID" type="checkbox"/><label for="@award.Title">@award.Title</label>
                             <br />

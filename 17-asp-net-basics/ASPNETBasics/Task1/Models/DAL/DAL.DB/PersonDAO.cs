@@ -17,7 +17,6 @@ namespace DAL.DB
         public PersonDAO()
         {
             stringBuilder = new SqlConnectionStringBuilder(DataBaseConfigurator.GetConnectionString());
-
         }
 
         public int AddUser(User user)
