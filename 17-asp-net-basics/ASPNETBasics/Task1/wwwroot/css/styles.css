@@ -243,8 +243,14 @@ footer .fixed-block{
     padding-left: 15px;
 }
 
-#copyright{
+.copyright {
+    display: flex;
     margin: auto;
+    align-content: center;
+}
+
+#mops{
+    padding-left:10px;
 }
 
 #nav-menu-contacts .links{
